@@ -124,7 +124,7 @@ for response in responses:
 * `simGetObjectPose`, `simSetObjectPose`: Unreal 환경에서 지정된 오브젝트의 포즈를 가져오고 설정합니다. 여기서 오브젝트는 언리얼 용어에서 "액터"를 의미합니다. 액터는 이름과 태그로 검색할 수 있습니다. UE 에디터에 표시된 이름은 각 실행에서 *자동 생성*되며 영구적이지 않습니다. 따라서 액터를 이름으로 참조하려면 UE Editor에서 자동 생성 된 이름을 변경해야합니다. 또는 Unreal Editor에서 해당 액터를 클릭 한 다음 [Tags property](https://answers.unrealengine.com/questions/543807/whats-the-difference-between-tag-and-tag.html)로 이동하여 "+"부호를 클릭하고 문자열 값을 추가하여 액터에 태그를 추가 할 수 있습니다. 여러 액터에 동일한 태그가 있으면 첫 번째 일치 항목이 반환됩니다. 일치하는 것이 없으면 NaN 포즈가 반환됩니다. 반환된 포즈는 플레이어 시작 시 원본과 함께 SI 단위의 NED 좌표에 있습니다. `simSetObjectPose`의 경우, 지정된 액터에 [Mobility](https://docs.unrealengine.com/en-us/Engine/Actors/Mobility)가 Movable로 설정되어 있어야합니다. 그렇지 않으면 정의되지 않은 동작이 발생합니다. `simSetObjectPose`는 `teleport` 매개 변수를 가지고 있는데, 이것은 객체가 다른 방식으로 [다른 객체를 통해 이동 됨](https://www.unrealengine.com/en-US/blog/moving-physical-objects)을 의미하며 이동이 성공하면 true를 반환합니다.
 
 ### 이미지 / Computer Vision API
-AirSim은 깊이, 시차, 표면 법선 및 비전을 포함한 지상의 상태와 함께 여러 카메라에서 동기화 된 이미지를 검색하는 포괄적인 이미지 API를 제공합니다. [settings.json](settings.md)에서 해상도, FOV, 모션 블러 등의 파라미터를 설정할 수 있습니다. 충돌 상태를 감지하기위한 API도 있습니다. 카메라 플랜에 대한 정규화, 시차 이미지의 계산 및 [pfm 형식](pfm.md)으로 저장하여 지정된 수의 스테레오 이미지와 지상 깊이 상태를 생성하는 [완전한 코드](https://github.com/Microsoft/AirSim/tree/master/Examples/DataCollection/StereoImageGenerator.hpp)도 참조하십시오.
+AirSim은 깊이, 시차(disparity), 표면 법선 및 비전을 포함한 지상의 상태와 함께 여러 카메라에서 동기화 된 이미지를 검색하는 포괄적인 이미지 API를 제공합니다. [settings.json](settings.md)에서 해상도, FOV, 모션 블러 등의 파라미터를 설정할 수 있습니다. 충돌 상태를 감지하기위한 API도 있습니다. 카메라 플랜에 대한 정규화, 시차(disparity) 이미지의 계산 및 [pfm 형식](pfm.md)으로 저장하여 지정된 수의 스테레오 이미지와 지상 깊이 상태를 생성하는 [완전한 코드](https://github.com/Microsoft/AirSim/tree/master/Examples/DataCollection/StereoImageGenerator.hpp)도 참조하십시오.
 
 [이미지 API 및 컴퓨터 비전 모드](image_apis.md)에 대한 추가 정보
 

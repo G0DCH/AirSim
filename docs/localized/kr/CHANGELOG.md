@@ -96,7 +96,7 @@
 * 코드를 빌드할 필요가 없습니다. [바이너리](https://github.com/Microsoft/AirSim/releases)를 다운로드하기만 하면 됩니다.
 * AirSim에서의 [강화 학습 예제](docs/reinforcement_learning.md)
 * 추가 설정없이 "작동"하는 새로운 내장 비행 컨트롤러 [simple_flight](docs/simple_flight.md). 또한 현재 *default*입니다.
-* AirSim은 이제 카메라 계획에 있는 [깊이 및 시차 이미지](docs/image_apis.md)도 생성합니다.
+* AirSim은 이제 카메라 계획에 있는 [깊이 및 시차(disparity) 이미지](docs/image_apis.md)도 생성합니다.
 * 이제 공식적인 리눅스 빌드 또한 있습니다!
 
 ## 2017년 9월
