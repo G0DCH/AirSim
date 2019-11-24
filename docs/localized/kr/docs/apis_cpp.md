@@ -1,22 +1,23 @@
-# Using C++ APIs for AirSim
+# AirSim용 C++ API 사용
 
-Please read [general API doc](apis.md) first if you haven't already. This document describes C++ examples and other C++ specific details.
+아직 [일반 API 문서](apis.md)를 읽지 않았다면 먼저 읽으십시오. 이 문서는 C++ 예제 및 기타 C++ 특정 세부 사항을 설명합니다.
 
-## Quick Start
-Fastest way to get started is to open AirSim.sln in Visual Studio 2017. You will see [Hello Car](https://github.com/Microsoft/AirSim/tree/master/HelloCar/) and [Hello Drone](https://github.com/Microsoft/AirSim/tree/master/HelloDrone/) examples in the solution. These examples will show you the include paths and lib paths you will need to setup in your VC++ projects. If you are using Linux then you will specify these paths either in your [cmake file](https://github.com/Microsoft/AirSim/tree/master/cmake//HelloCar/CMakeLists.txt) or on compiler command line.
+## 빠른 시작
+가장 빠른 시작 방법은 Visual Studio 2017에서 AirSim.sln을 여는 것입니다. 솔루션에 [Hello Car](https://github.com/Microsoft/AirSim/tree/master/HelloCar/) 및 [Hello Drone](https://github.com/Microsoft/AirSim/tree/master/HelloDrone/) 예제가 표시됩니다. 다음 예제에서는 VC++ 프로젝트에서 설정해야 할 include 경로 및 lib 경로를 보여 줍니다. 
+Linux를 사용하는 경우 [cmake 파일](https://github.com/Microsoft/AirSim/tree/master/cmake//HelloCar/CMakeLists.txt) 또는 컴파일러 커맨드 라인에서 이러한 경로를 지정합니다.
 
-#### Include and Lib Folders
-* Include folders: `$(ProjectDir)..\AirLib\deps\rpclib\include;include;$(ProjectDir)..\AirLib\deps\eigen3;$(ProjectDir)..\AirLib\include`
+#### Include 및 Lib 폴더
+* Include 폴더: `$(ProjectDir)..\AirLib\deps\rpclib\include;include;$(ProjectDir)..\AirLib\deps\eigen3;$(ProjectDir)..\AirLib\include`
 * Dependencies: `rpc.lib`
-* Lib folders: `$(ProjectDir)\..\AirLib\deps\MavLinkCom\lib\$(Platform)\$(Configuration);$(ProjectDir)\..\AirLib\deps\rpclib\lib\$(Platform)\$(Configuration);$(ProjectDir)\..\AirLib\lib\$(Platform)\$(Configuration)`
+* Lib 폴더: `$(ProjectDir)\..\AirLib\deps\MavLinkCom\lib\$(Platform)\$(Configuration);$(ProjectDir)\..\AirLib\deps\rpclib\lib\$(Platform)\$(Configuration);$(ProjectDir)\..\AirLib\lib\$(Platform)\$(Configuration)`
 
 ## Hello Car
 
-Here's how to use AirSim APIs using Python to control simulated car (see also [Python example](apis.md#hello_car)):
+C++을 사용하여 AirSim API를 사용하여 시뮬레이션 자동차를 제어하는 ​​방법은 다음과 같습니다 ([Python 예제](apis.md#hello_car) 참조):
 
 ```cpp
 
-// ready to run example: https://github.com/Microsoft/AirSim/blob/master/HelloCar/main.cpp
+// 실행 준비가 된 예제: https://github.com/Microsoft/AirSim/blob/master/HelloCar/main.cpp
 
 #include <iostream>
 #include "vehicles/car/api/CarRpcLibClient.hpp"
@@ -24,7 +25,7 @@ Here's how to use AirSim APIs using Python to control simulated car (see also [P
 int main() 
 {
     msr::airlib::CarRpcLibClient client;
-    client.enableApiControl(true); //this disables manual control
+    client.enableApiControl(true); //이것은 수동 제어를 비활성화합니다
     CarControllerBase::CarControls controls;
 
     std::cout << "Press enter to drive forward" << std::endl; std::cin.get();
@@ -50,11 +51,11 @@ int main()
 
 ## Hello Drone
 
-Here's how to use AirSim APIs using Python to control simulated car (see also [Python example](apis.md#hello_drone)):
+C++을 사용하여 AirSim API를 사용하여 시뮬레이션 quadrotor를 제어하는 ​​방법은 다음과 같습니다 ([Python 예제](apis.md#hello_drone) 참조):
 
 ```cpp
 
-// ready to run example: https://github.com/Microsoft/AirSim/blob/master/HelloDrone/main.cpp
+// 실행 준비가 된 예제: https://github.com/Microsoft/AirSim/blob/master/HelloDrone/main.cpp
 
 #include <iostream>
 #include "vehicles/multirotor/api/MultirotorRpcLibClient.hpp"
@@ -84,8 +85,8 @@ int main()
 }
 ```
 
-## See Also
-* [Examples](../Examples) of how to use internal infrastructure in AirSim in your other projects
-* [DroneShell](../DroneShell) app shows how to make simple interface using C++ APIs to control drones
-* [Python APIs](apis.md)
+## 참조
+* 다른 프로젝트에서 AirSim의 내부 인프라를 사용하는 방법의 [예](../Examples)
+* [DroneShell](../DroneShell) 앱은 C++ API를 사용하여 드론을 제어하는 ​​간단한 인터페이스를 만드는 방법을 보여줍니다.
+* [Python API](apis.md)
 

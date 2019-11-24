@@ -121,7 +121,7 @@ int getStereoAndDepthImages()
 }
 ```
 
-## 완전한 예제 실행 준비
+## 완전히 실행 준비가 된 예제
 
 ### Python
 
@@ -253,7 +253,7 @@ print(np.unique(img_rgb[:,:,1], return_counts=True)) #green
 print(np.unique(img_rgb[:,:,2], return_counts=True)) #blue  
 ```
 
-완전한 실행 준비 예제는 [segmentation.py](https://github.com/Microsoft/AirSim/tree/master/PythonClient//computer_vision/segmentation.py)에서 확인할 수 있습니다.
+완전히 실행 준비가 된 예제는 [segmentation.py](https://github.com/Microsoft/AirSim/tree/master/PythonClient//computer_vision/segmentation.py)에서 확인할 수 있습니다.
 
 #### 객체 ID 설정 해제
 세그먼트 이미지에 표시되지 않도록 객체의 ID를 -1로 설정할 수 있습니다.

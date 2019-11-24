@@ -40,7 +40,7 @@ C ++ API 및 예제를 사용하려면 [C++ API 안내서](apis_cpp.md)를 참�
 Python을 사용하여 AirSim API를 통해 시뮬레이션 자동차를 제어하는 ​​방법은 다음과 같습니다 ([C++ 예제](apis_cpp.md#hello_car) 또한 참조하세요):
 
 ```python
-# 예제를 실행할 준비: PythonClient/car/hello_car.py
+# 실행 준비가 된 예제: PythonClient/car/hello_car.py
 import airsim
 import time
 
@@ -81,10 +81,10 @@ while True:
 ```
 
 ## Hello Drone
-Python을 사용하여 AirSim API를 사용하여 시뮬레이션 쿼드 로터를 제어하는 ​​방법은 다음과 같습니다([C++ 예제](apis_cpp.md#hello_drone) 또한 참조하세요):
+Python을 사용하여 AirSim API를 사용하여 시뮬레이션 quadrotor를 제어하는 ​​방법은 다음과 같습니다([C++ 예제](apis_cpp.md#hello_drone) 또한 참조하세요):
 
 ```python
-# 예제를 실행할 준비: PythonClient/multirotor/hello_drone.py
+# 실행 준비가 된 예제: PythonClient/multirotor/hello_drone.py
 import airsim
 
 # AirSim 시뮬레이터에 연결
