@@ -1,13 +1,13 @@
-# AirSim Settings
+# AirSim 설정
 
-## Where are Settings Stored?
+## 설정은 어디에 저장됩니까?
 Windows: `Documents\AirSim`
 Linux: `~/Documents/AirSim`
 
-The file is in usual [json format](https://en.wikipedia.org/wiki/JSON). On first startup AirSim would create `settings.json` file with no settings. To avoid problems, always use ASCII format to save json file.
+파일은 일반적인 [json 형식](https://en.wikipedia.org/wiki/JSON)입니다. 처음 시작할 때 AirSim은 설정없이 `settings.json` 파일을 생성합니다. 문제를 피하려면 항상 ASCII 형식을 사용하여 json 파일을 저장하십시오.
 
-## How to Chose Between Car and Multirotor?
-The default is to use multirotor. To use car simple set `"SimMode": "Car"` like this:
+## 자동차와 멀티 로터를 어떻게 선택합니까?
+기본값은 멀티 로터를 사용하는 것입니다. 자동차를 사용하려면 다음과 같이 `"SimMode": "Car"`로 설정하십시오:
 
 ```
 {
@@ -16,12 +16,12 @@ The default is to use multirotor. To use car simple set `"SimMode": "Car"` like 
 }
 ```
 
-To choose multirotor, set `"SimMode": "Multirotor"`. If you want to prompt user to select vehicle type then use `"SimMode": ""`.
+멀티 로터를 선택하려면 `"SimMode": "Multirotor"`로 설정하십시오. 차량 종류를 선택하라는 메시지를 표시하려면 `"SimMode": ""`를 사용하십시오.
 
-## Available Settings and Their Defaults
-Below are complete list of settings available along with their default values. If any of the settings is missing from json file, then default value is used. Some default values are simply specified as `""` which means actual value may be chosen based on the vehicle you are using. For example, `ViewMode` setting has default value `""` which translates to `"FlyWithMe"` for drones and `"SpringArmChase"` for cars.
+## 사용 가능한 설정 및 기본 값
+아래는 기본값과 함께 사용 가능한 전체 설정 목록입니다. json 파일에서 누락 된 설정이 있으면 기본값이 사용됩니다. 일부 기본값은 단순히 `""`로 지정되는데, 이는 실제 차량이 사용중인 차량에 따라 선택 될 수 있음을 의미합니다. 예를 들어, `ViewMode` 설정에는 기본 값 `""`이 있으며 드론의 경우 `"FlyWithMe"`로, 자동차의 경우 `"SpringArmChase"`로 해석됩니다.
 
-**WARNING:** Do not copy paste all of below in your settings.json. We strongly recommend adding only those settings that you don't want default values. Only required element is `"SettingsVersion"`.
+**주의:** settings.json에 아래의 모든 내용을 붙여 넣지 마십시오. 기본값을 원하지 않는 설정만 추가하는 것이 좋습니다. 필요한 요소는 "SettingsVersion" 뿐 입니다.
 
 ```
 {
@@ -164,32 +164,33 @@ Below are complete list of settings available along with their default values. I
 ```
 
 ## SimMode
-SimMode determines which simulation mode will be used. Below are currently supported values: 
-- `""`: prompt user to select vehicle type multirotor or car
-- `"Multirotor"`: Use multirotor simulation
-- `"Car"`: Use car simulation
-- `"ComputerVision"`: Use only camera, no vehicle or physics
+SimMode는 사용할 시뮬레이션 모드를 결정합니다. 다음은 현재 지원되는 값입니다:
+- `""`: 사용자에게 차량 타입으로 멀티 로터 또는 자동차를 선택하라는 메시지를 표시
+- `"Multirotor"`: 멀티로터 시뮬레이션 사용
+- `"Car"`: 자동차 시뮬레이션 사용
+- `"ComputerVision"`: 카메라만 사용하고, 차량이나 물리는 사용하지 않음
 
 ## ViewMode 
-The ViewMode determines which camera to use as default and how camera will follow the vehicle. For multirotors, the default ViewMode is `"FlyWithMe"` while for cars the default ViewMode is `"SpringArmChase"`.
+ViewMode는 기본으로 사용할 카메라와 카메라가 차량을 따르는 방법을 결정합니다. 멀티 로터의 경우 기본 ViewMode는 `"FlyWithMe"`이고 자동차의 경우 기본 ViewMode는 `"SpringArmChase"`입니다.
 
-* `FlyWithMe`: Chase the vehicle from behind with 6 degrees of freedom
-* `GroundObserver`: Chase the vehicle from 6' above the ground but with full freedom in XY plane.
-* `Fpv`: View the scene from front camera of vehicle
-* `Manual`: Don't move camera automatically. Use arrow keys and ASWD keys for move camera manually.
-* `SpringArmChase`: Chase the vehicle with camera mounted on (invisible) arm that is attached to the vehicle via spring (so it has some latency in movement).
-* `NoDisplay`: This will freeze rendering for main screen however rendering for subwindows, recording and APIs remain active. This mode is useful to save resources in "headless" mode where you are only interested in getting images and don't care about what gets rendered on main screen. This may also improve FPS for recording images.
+* `FlyWithMe`: 6의 자유도로 자동차를 뒤에서 추적
+* `GroundObserver`: 지면에서 6인치 높이로 차량을 추격하되 XY 평면에서 완전히 자유롭습니다.
+* `Fpv`: 차량의 전면 카메라에서 씬을 봅니다.
+* `Manual`: 카메라를 자동으로 움직이지 마십시오. 카메라를 수동으로 이동하려면 방향 키와 ASWD 키를 사용하십시오.
+* `SpringArmChase`: 스프링을 통해 차량에 부착된(보이지 않는) 팔(arm)에 장착된 카메라로 차량을 추적합니다(이동 지연 시간이 약간 있음).
+* `NoDisplay`: 메인 화면의 렌더링은 고정되지만 하위 창, 레코딩 및 API의 렌더링은 활성 상태로 유지됩니다. 이 모드는 이미지를 얻는 데에만 관심이 있고 기본 화면에 렌더링되는 내용에 신경 쓰지 않는 "headless"모드로 리소스를 저장하는 데 유용합니다. 이렇게 하면 이미지 기록을 위한 FPS도 향상될 수 있습니다.
 
 ## TimeOfDay
-This setting controls the position of Sun in the environment. By default `Enabled` is false which means Sun's position is left at whatever was the default in the environment and it doesn't change over the time. If `Enabled` is true then Sun position is computed using longitude, latitude and altitude specified in `OriginGeopoint` section for the date specified in `StartDateTime` in the string format as [%Y-%m-%d %H:%M:%S](https://en.cppreference.com/w/cpp/io/manip/get_time), for example, `2018-02-12 15:20:00`. If this string is empty then current date and time is used. If `StartDateTimeDst` is true then we adjust for day light savings time. The Sun's position is then continuously updated at the interval specified in `UpdateIntervalSecs`. In some cases, it might be desirable to have celestial clock run faster or slower than simulation clock. This can be specified using `CelestialClockSpeed`, for example, value 100 means for every 1 second of simulation clock, Sun's position is advanced by 100 seconds so Sun will move in sky much faster.
+이 설정은 환경에서 태양의 위치를 ​​제어합니다. 기본적으로 `Enabled`는 false입니다. 이는 태양의 위치가 환경의 기본값에 그대로 있고 시간이 지나도 변하지 않음을 의미합니다. `Enabled`가 true 인 경우, 태양 위치는 `StartDateTime`에 지정된 날짜의 `OriginGeopoint` 섹션에 지정된 경도, 위도 및 고도를 사용하여 문자열 형식으로 [%Y-%m-%d %H:%M:%S](https://en.cppreference.com/w/cpp/io/manip/get_time)으로 계산됩니다(예 :`2018-02-12 15:20:00`). 이 문자열이 비어 있으면 현재 날짜와 시간이 사용됩니다. `StartDateTimeDst`가 true이면 일광 절약 시간에 맞게 조절 합니다. 그런 다음 `UpdateIntervalSecs`에 지정된 간격으로 태양의 위치가 지속적으로 업데이트됩니다. 경우에 따라 천체 시계가 시뮬레이션 시계보다 빠르거나 느리게 실행되도록 하는 것이 바람직할 수 있습니다. 이것은 `CelestialClockSpeed`를 사용하여 지정할 수 있습니다. 예를 들어, 100은 시뮬레이션 클럭의 1초마다 100을 의미하며, 태양의 위치는 1초에 100씩 증가하므로 Sun은 훨씬 빠르게 하늘에서 움직입니다.
 
-Also see [Time of Day API](apis.md#time-of-day-api).
+[Time of Day API](apis.md#time-of-day-api)도 참조하십시오.
 
 ## OriginGeopoint
-This setting specifies the latitude, longitude and altitude of the Player Start component placed in the Unreal environment. The vehicle's home point is computed using this transformation. Note that all coordinates exposed via APIs are using NED system in SI units which means each vehicle starts at (0, 0, 0) in NED system. Time of Day settings are computed for geographical coordinates specified in `OriginGeopoint`.
+이 설정은 언리얼 환경에 배치 된 Player Start 컴포넌트의 위도, 경도 및 고도를 지정합니다. 차량의 원점은 이 transformation을 사용하여 계산됩니다. API를 통해 노출 된 모든 좌표는 SI 단위로 NED 시스템을 사용하고 있으며 이는 각 차량이 NED 시스템에서 (0, 0, 0)에서 시작 함을 의미합니다. Time of Day 설정은 'OriginGeopoint'에 지정된 지리적 좌표에 대해 계산됩니다.
 
 ## SubWindows
-This setting determines what is shown in each of 3 subwindows which are visible when you press 0 key. The WindowsID can be 0 to 2, CameraName is any [available camera](image_apis.md#available_cameras) on the vehicle. ImageType integer value determines what kind of image gets shown according to [ImageType enum](image_apis.md#available-imagetype). For example, for car vehicles below shows driver view, front bumper view and rear view as scene, depth and surface normals respectively.
+이 설정은 0 키를 누를 때 표시되는 3 개의 하위 창 각각에 표시되는 내용을 결정합니다. 
+WindowsID는 0에서 2 일 수 있으며 CameraName은 차량의 모든 [사용 가능한 카메라](image_apis.md#available_cameras)입니다. ImageType 정수 값은 [ImageType enum](image_apis.md#available-imagetype)에 따라 표시되는 이미지 종류를 결정합니다. 예를 들어, 아래 차량의 경우, 운전자 뷰, 전면 범퍼 뷰 및 후면 뷰가 각각 장면, 깊이 및 표면 법선으로 표시됩니다.
 ```
   "SubWindows": [
     {"WindowID": 0, "ImageType": 0, "CameraName": "3", "Visible": true},
@@ -198,82 +199,82 @@ This setting determines what is shown in each of 3 subwindows which are visible 
   ]
 ```
 ## Recording
-The recording feature allows you to record data such as position, orientation, velocity along with the captured image at specified intervals. You can start recording by pressing red Record button on lower right or the R key. The data is stored in the `Documents\AirSim` folder, in a time stamped subfolder for each recording session, as tab separated file.
+녹화 기능을 사용하면 위치, 방향, 속도 등의 데이터를 지정된 간격으로 캡처 된 이미지와 함께 녹화 할 수 있습니다. R키 또는 오른쪽 아래의 빨간색 녹화 버튼을 눌러 녹화를 시작할 수 있습니다. 데이터는 각 기록 세션에 대해 타임 스탬프 된 하위 폴더에있는 `Documents\AirSim` 폴더에 탭으로 구분 된 파일로 저장됩니다.
 
-* `RecordInterval`: specifies minimal interval in seconds between capturing two images.
-* `RecordOnMove`: specifies that do not record frame if there was vehicle's position or orientation hasn't changed.
-* `Cameras`: this element controls which cameras are used to capture images. By default scene image from camera 0 is recorded as compressed png format. This setting is json array so you can specify multiple cameras to capture images, each with potentially different [image types](settings.md#image-capture-settings). When PixelsAsFloat is true, image is saved as [pfm](pfm.md) file instead of png file.
+* `RecordInterval`: 두 이미지 캡처 사이의 최소 간격(초)을 지정합니다.
+* `RecordOnMove`: 차량의 위치나 방향이 변경되지 않은 경우 프레임을 기록하지 않도록 지정합니다.
+* `Cameras`: 이 요소는 이미지를 캡처하는 데 사용되는 카메라를 제어합니다. 기본적으로 카메라 0의 장면 이미지는 압축 된 png 형식으로 기록됩니다. 이 설정은 json 배열이므로 여러 대의 카메라를 지정하여 이미지를 캡처할 수 있으며, 각 카메라는 잠재적으로 다른 [이미지 타입](settings.md#image-capture-settings)을 사용합니다. PixelsAsFloat가 true 인 경우 이미지는 png 파일 대신 [pfm](pfm.md) 파일로 저장됩니다.
 
 ## ClockSpeed
-This setting allows you to set the speed of simulation clock with respect to wall clock. For example, value of 5.0 would mean simulation clock has 5 seconds elapsed when wall clock has 1 second elapsed (i.e. simulation is running faster). The value of 0.1 means that simulation clock is 10X slower than wall clock. The value of 1 means simulation is running in real time. It is important to realize that quality of simulation may decrease as the simulation clock runs faster. You might see artifacts like object moving past obstacles because collision is not detected. However slowing down simulation clock (i.e. values < 1.0) generally improves the quality of simulation.
+이 설정을 사용하면 wall clock과 관련하여 시뮬레이션 클럭의 속도를 설정할 수 있습니다. 예를 들어, 5.0 값은 wall clock이 1초가 경과했을 때(즉, 시뮬레이션이 더 빠르게 실행 됨) 시뮬레이션 시계가 5초가 경과했음을 의미합니다. 0.1값은 시뮬레이션 클럭이 wall clock보다 10배 느리다는 것을 의미합니다. 1값은 시뮬레이션이 실시간으로 실행되고 있음을 의미합니다. 시뮬레이션 클럭이 빠르게 실행 될수록 시뮬레이션 품질이 저하 될 수 있음을 인식해야 합니다. 충돌이 감지되지 않기 때문에 장애물을 지나 움직이는 물체 같은 아티팩트를 볼 수 있습니다. 그러나 시뮬레이션 클럭의 감속(즉, value < 1.0)은 일반적으로 시뮬레이션의 품질을 향상시킵니다.
 
 ## Segmentation Settings
-The `InitMethod` determines how object IDs are initialized at startup to generate [segmentation](image_apis.md#segmentation). The value "" or "CommonObjectsRandomIDs" (default) means assign random IDs to each object at startup. This will generate segmentation view with random colors assign to each object. The value "None" means don't initialize object IDs. This will cause segmentation view to have single solid colors. This mode is useful if you plan to set up object IDs using [APIs](image_apis.md#segmentation) and it can save lot of delay at startup for large environments like CityEnviron.
+`InitMethod`는 [segmentation](image_apis.md#segmentation)을 생성하기 위해 시작시 객체 ID가 초기화되는 방법을 결정합니다. "" 또는 "CommonObjectsRandomIDs"(기본값) 값은 시작 시 각 개체에 임의의 ID를 할당 함을 의미합니다. 각 객체에 임의의 색상이 할당 된 segmentation 뷰가 생성됩니다. "None"값은 객체 ID를 초기화하지 않음을 의미합니다. 이렇게 하면 segmentation 뷰에 단일 솔리드 색상이 지정됩니다. 이 모드는 [API](image_apis.md#segmentation)를 사용하여 객체 ID를 설정하려는 경우 유용하며 CityEnviron과 같은 대규모 환경에서 시작시 많은 지연을 줄일 수 있습니다.
 
- If `OverrideExisting` is false then initialization does not alter non-zero object IDs already assigned otherwise it does.
+ `OverrideExisting`이 false이면 초기화시 이미 할당 된 0이 아닌 객체 ID를 변경하지 않습니다.
 
- If `MeshNamingMethod` is "" or "OwnerName" then we use mesh's owner name to generate random hash as object IDs. If its "StaticMeshName" then we use static mesh's name to generate random hash as object IDs. Note that it is not possible to tell individual instances of the same static mesh apart this way, but the names are often more intuitive.
+ `MeshNamingMethod`가 "" 또는 "OwnerName"이면 메시의 소유자 이름을 사용하여 임의의 해시를 객체 ID로 생성합니다. "StaticMeshName"인 경우 static 메시의 이름을 사용하여 임의의 해시를 객체 ID로 생성합니다. 이 방법으로 동일한 static 메시의 개별 인스턴스를 구분할 수는 없지만 이름이 더 직관적 인 경우가 많습니다.
 
 ## Camera Settings
-The `CameraDefaults` element at root level specifies defaults used for all cameras. These defaults can be overridden for individual camera in `Cameras` element inside `Vehicles` as described later.
+루트 수준의 `CameraDefaults` 요소는 모든 카메라에 사용되는 기본값을 지정합니다. 이 기본값은 나중에 설명 할 `차량` 안의 `카메라` 요소에서 개별 카메라에 대해 재정의 될 수 있습니다.
 
 ### Note on ImageType element
-The `ImageType` element in JSON array determines which image type that settings applies to. The valid values are described in [ImageType section](image_apis.md#available-imagetype). In addition, we also support special value `ImageType: -1` to apply the settings to external camera (i.e. what you are looking at on the screen).
+JSON 배열의 `ImageType` 요소는 설정이 적용되는 이미지 타입을 결정합니다. 유효한 값은 [이미지 타입 섹션](image_apis.md#available-imagetype)에 설명되어 있습니다. 또한 특수 값 `ImageType: -1`을 지원하여 설정을 외부 카메라(예 : 화면에서 보고있는 것)에 적용합니다.
 
-For example, `CaptureSettings` element is json array so you can add settings for multiple image types easily.
+예를 들어, `CaptureSettings` 요소는 json 배열이므로 여러 이미지 유형에 대한 설정을 쉽게 추가 할 수 있습니다.
 
 ### CaptureSettings
-The `CaptureSettings` determines how different image types such as scene, depth, disparity, surface normals and segmentation views are rendered. The Width, Height and FOV settings should be self explanatory. The AutoExposureSpeed decides how fast eye adaptation works. We set to generally high value such as 100 to avoid artifacts in image capture. Similarly we set MotionBlurAmount to 0 by default to avoid artifacts in ground truth images. The `ProjectionMode` decides the projection used by the capture camera and can take value "perspective" (default) or "orthographic". If projection mode is "orthographic" then `OrthoWidth` determines width of projected area captured in meters.
+'CaptureSettings'는 장면, 깊이, 시차, 표면 법선 및 분할 뷰와 같은 다양한 이미지 유형이 렌더링되는 방식을 결정합니다. 폭, 높이 및 FOV 설정은 자동으로 설명해야 합니다. AutoExposureSpeed는 눈의 적응 속도를 결정합니다. 이미지 캡처에서 아티팩트를 피하기 위해 일반적으로 100과 같은 높은 값으로 설정했습니다. 마찬가지로 지면 상태 이미지의 아티팩트를 피하기 위해 MotionBlurAmount를 기본적으로 0으로 설정했습니다. `ProjectionMode`는 캡처 카메라가 사용하는 투사를 결정하며 "perspective"(기본값) 또는 "orthographic" 값을 가질 수 있습니다. 투영 모드가 "orthographic"인 경우 'OrthoWidth'는 미터 단위로 캡처 된 투영 영역의 너비를 결정합니다.
 
-For explanation of other settings, please see [this article](https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/AutomaticExposure/). 
+다른 설정에 대한 설명은 [이 기사](https://docs.unrealengine.com/latest/INT/Engine/Rendering/PostProcessEffects/AutomaticExposure/)를 참조하십시오..
 
 ### NoiseSettings
-The `NoiseSettings` allows to add noise to the specified image type with a goal of simulating camera sensor noise, interference and other artifacts. By default no noise is added, i.e., `Enabled: false`. If you set `Enabled: true` then following different types of noise and interference artifacts are enabled, each can be further tuned using setting. The noise effects are implemented as shader created as post processing material in Unreal Engine called [CameraSensorNoise](https://github.com/Microsoft/AirSim/blob/master/Unreal/Plugins/AirSim/Content/HUDAssets/CameraSensorNoise.uasset).
+`NoiseSettings`는 카메라 센서 노이즈, 간섭 및 기타 아티팩트를 시뮬레이션하기 위해 지정된 이미지 유형에 노이즈를 추가 할 수 있습니다. 기본적으로 노이즈가 추가되지 않습니다 (예 : `Enabled: false`). `Enabled: true`를 설정하면 다음과 같은 다른 유형의 노이즈 및 간섭 아티팩트가 활성화되며 각각 설정을 사용하여 조정할 수 있습니다. 노이즈 효과는 Unreal Engine에서 [CameraSensorNoise](https://github.com/Microsoft/AirSim/blob/master/Unreal/Plugins/AirSim/Content/HUDAssets/CameraSensorNoise.uasset)라는 포스트 프로세싱 머티리얼로 생성 된 셰이더로 구현됩니다.
 
-Demo of camera noise and interference simulation:
+카메라 노이즈 및 간섭 시뮬레이션 데모:
 
 [![AirSim Drone Demo Video](images/camera_noise_demo.png)](https://youtu.be/1BeCEZmQyp0)
 
 #### Random noise
-This adds random noise blobs with following parameters.
-* `RandContrib`: This determines blend ratio of noise pixel with image pixel, 0 means no noise and 1 means only noise.
-* `RandSpeed`: This determines how fast noise fluctuates, 1 means no fluctuation and higher values like 1E6 means full fluctuation.
-* `RandSize`: This determines how coarse noise is, 1 means every pixel has its own noise while higher value means more than 1 pixels share same noise value.
-* `RandDensity`: This determines how many pixels out of total will have noise, 1 means all pixels while higher value means lesser number of pixels (exponentially).
+다음과 같은 매개 변수로 임의 노이즈 blob을 추가합니다.
+* `RandContrib`: 노이즈 픽셀과 이미지 픽셀의 혼합 비율을 결정합니다. 0은 노이즈가 없음을, 1은 노이즈 만을 의미합니다.
+* `RandSpeed`: 이는 노이즈가 얼마나 빠르게 변동 하는지를 결정합니다. 1은 변동이 없음을 의미하고 1E6과 같이 높은 값은 전체 변동을 의미합니다.
+* `RandSize`: 이는 대략적인 노이즈가 얼마나 큰지를 결정합니다. 1은 모든 픽셀에 고유 한 노이즈가 있고 그 이상의 값은 1 개 이상의 픽셀이 동일한 노이즈 값을 공유한다는 의미입니다.
+* `RandDensity`: 이것은 총 몇 개의 픽셀에서 노이즈가 발생 하는지를 결정합니다. 1은 모든 픽셀을 의미하고 그 이상의 값은 더 적은 수의 픽셀을 의미합니다 (지수 적으로).
 
 #### Horizontal bump distortion
-This adds horizontal bumps / flickering / ghosting effect.
-* `HorzWaveContrib`: This determines blend ratio of noise pixel with image pixel, 0 means no noise and 1 means only noise.
-* `HorzWaveStrength`: This determines overall strength of the effect.
-* `HorzWaveVertSize`: This determines how many vertical pixels would be effected by the effect.
-* `HorzWaveScreenSize`: This determines how much of the screen is effected by the effect.
+수평 범프 / 깜박임 / ghosting 효과가 추가됩니다.
+* `HorzWaveContrib`: 노이즈 픽셀과 이미지 픽셀의 혼합 비율을 결정합니다. 0은 노이즈가 없음을, 1은 노이즈 만을 의미합니다.
+* `HorzWaveStrength`: 효과의 전반적인 강도를 결정합니다.
+* `HorzWaveVertSize`: 이 효과에 의해 영향을 받는 수직 픽셀 수를 결정합니다.
+* `HorzWaveScreenSize`: 이 효과에 의해 영향을 받는 화면의 양을 결정합니다.
 
 #### Horizontal noise lines
-This adds regions of noise on horizontal lines.
-* `HorzNoiseLinesContrib`: This determines blend ratio of noise pixel with image pixel, 0 means no noise and 1 means only noise.
-* `HorzNoiseLinesDensityY`: This determines how many pixels in horizontal line gets affected.
-* `HorzNoiseLinesDensityXY`: This determines how many lines on screen gets affected.
+이것은 수평선에 노이즈 영역을 추가합니다.
+* `HorzNoiseLinesContrib`: 노이즈 픽셀과 이미지 픽셀의 혼합 비율을 결정합니다. 0은 노이즈가 없음을, 1은 노이즈 만을 의미합니다.
+* `HorzNoiseLinesDensityY`: 수평선의 픽셀 수에 영향을 줍니다.
+* `HorzNoiseLinesDensityXY`: 화면의 몇 줄이 영향을 받는지 결정합니다.
 
 #### Horizontal line distortion
-This adds fluctuations on horizontal line.
-* `HorzDistortionContrib`: This determines blend ratio of noise pixel with image pixel, 0 means no noise and 1 means only noise.
-* `HorzDistortionStrength`: This determines how large is the distortion.
+이렇게 하면 수평선에 변동이 추가됩니다.
+* `HorzDistortionContrib`: 노이즈 픽셀과 이미지 픽셀의 혼합 비율을 결정합니다. 0은 노이즈가 없음을, 1은 노이즈 만을 의미합니다.
+* `HorzDistortionStrength`: 이것은 왜곡의 크기를 결정합니다.
 
 ### Gimbal
-The `Gimbal` element allows to freeze camera orientation for pitch, roll and/or yaw. This setting is ignored unless `ImageType` is -1. The `Stabilization` is defaulted to 0 meaning no gimbal i.e. camera orientation changes with body orientation on all axis. The value of 1 means full stabilization. The value between 0 to 1 acts as a weight for fixed angles specified (in degrees, in world-frame) in `Pitch`, `Roll` and `Yaw` elements and orientation of the vehicle body. When any of the angles is omitted from json or set to NaN, that angle is not stabilized (i.e. it moves along with vehicle body).
+`Gimbal` 요소는 pitch, roll 및/또는 yaw를 통해 카메라 방향을 고정시킬 수 있습니다. `ImageType`이 -1이 아니면이 설정은 무시됩니다. `Stabilization`는 기본 값으로 0으로 설정되어 Gimbal 즉, 모든 축의 바디 방향에 따라 카메라 방향이 변경되지 않습니다. 1의 값은 완전 안정화를 의미합니다. 0에서 1 사이의 값은 `Pitch`, `Roll` 및 `Yaw` 요소에 지정된 고정 각도(도 단위, 월드 프레임)의 가중치 및 차체의 방향으로 작용합니다. json에서 각도를 생략하거나 NaN으로 설정하면 각도가 안정화되지 않습니다(즉, 차체와 함께 이동).
 
 ## Vehicles Settings
-Each simulation mode will go through the list of vehicles specified in this setting and create the ones that has `"AutoCreate": true`. Each vehicle specified in this setting has key which becomes the name of the vehicle. If `"Vehicles"` element is missing then this list is populated with default car named "PhysXCar" and default multirotor named "SimpleFlight".
+각 시뮬레이션 모드는 이 설정에 지정된 차량 목록을 살펴보고 `AutoCreate`: true인 차량을 만듭니다. 이 설정에 지정된 각 차량에는 차량 이름이 되는 키가 있습니다. "Vehicles" 요소가 없으면 이 목록은 "PhysXCar"라는 기본 자동차와 "SimpleFlight"라는 기본 멀티 로터로 채워집니다.
 
 ### Common Vehicle Setting
-- `VehicleType`: This could be either `PhysXCar`, `SimpleFlight`, `PX4Multirotor` or `ComputerVision`. There is no default value therefore this element must be specified.
-- `PawnPath`: This allows to override the pawn blueprint to use for the vehicle. For example, you may create new pawn blueprint derived from ACarPawn for a warehouse robot in your own project outside the AirSim code and then specify its path here. See also [PawnPaths](#PawnPaths).
-- `DefaultVehicleState`: Possible value for multirotors is `Armed` or `Disarmed`.
-- `AutoCreate`: If true then this vehicle would be spawned (if supported by selected sim mode).
-- `RC`: This sub-element allows to specify which remote controller to use for vehicle using `RemoteControlID`. The value of -1 means use keyboard (not supported yet for multirotors). The value >= 0 specifies one of many remote controllers connected to the system. The list of available RCs can be seen in Game Controllers panel in Windows, for example.
-- `X, Y, Z, Yaw, Roll, Pitch`: These elements allows you to specify the initial position and orientation of the vehicle. Position is in NED coordinates in SI units with origin set to Player Start location in Unreal environment. The orientation is specified in degrees.
-- `IsFpvVehicle`: This setting allows to specify which vehicle camera will follow and the view that will be shown when ViewMode is set to Fpv. By default, AirSim selects the first vehicle in settings as FPV vehicle.
-- `Cameras`: This element specifies camera settings for vehicle. The key in this element is name of the [available camera](image_apis.md#available_cameras) and the value is same as `CameraDefaults` as described above. For example, to change FOV for the front center camera to 120 degrees, you can use this for `Vehicles` setting:
+- `VehicleType`: `PhysXCar`, `SimpleFlight`,`PX4Multirotor` 또는 `ComputerVision` 중 하나 일 수 있습니다. 기본 값이 없으므로 이 요소를 지정해야 합니다.
+- `PawnPath`: 이를 통해 차량에 사용되는 폰 블루 프린트를 덮어 쓸 수 있습니다. 예를 들어, AirSim 코드 외부의 자체 프로젝트에서 웨어 하우스 로봇에 대해 ACarPawn에서 파생 된 새로운 폰 블루 프린트를 생성 한 다음 여기에 경로를 지정할 수 있습니다. [PawnPaths](#PawnPaths)도 참조하십시오.
+- `DefaultVehicleState`: 멀티 로터의 가능한 값은 `Armed` 또는 `Disarmed`입니다.
+- `AutoCreate`: true면 이 차량이 스폰됩니다(선택된 sim 모드에서 지원되는 경우).
+- `RC`: 이 하위 요소는 `RemoteControlID`를 사용하여 차량에 사용할 리모컨을 지정할 수 있습니다. -1 값은 키보드 사용을 의미합니다(멀티 로터에서는 아직 지원되지 않음). value >= 0은 시스템에 연결된 많은 리모콘 중 하나를 지정합니다. 사용 가능한 RC 목록은 예를 들어 Windows의 게임 컨트롤러 패널에서 볼 수 있습니다.
+- `X, Y, Z, Yaw, Roll, Pitch`: 이 요소들을 사용하여 차량의 초기 위치와 방향을 지정할 수 있습니다. Unreal 환경에서 원점이 플레이어 시작 위치로 설정된 SI 단위의 위치는 NED 좌표입니다. 방향은 도 단위로 지정됩니다.
+- `IsFpvVehicle`: 이 설정을 통해 팔로우 할 차량 카메라와 ViewMode가 Fpv로 설정 될 때 표시되는 뷰를 지정할 수 있습니다. 기본적으로 AirSim은 설정에서 첫 번째 차량을 FPV 차량으로 선택합니다.
+- `Cameras`: 이 요소는 차량의 카메라 설정을 지정합니다. 이 요소의 키는 [사용 가능한 카메라](image_apis.md#available_cameras)의 이름이며 값은 위에서 설명한 `CameraDefaults`와 같습니다. 예를 들어, 전방 중앙 카메라의 FOV를 120 도로 변경하려면 `vehicles` 설정에서 다음을 사용할 수 있습니다:
 
 ```json
 "Vehicles": {
@@ -294,7 +295,7 @@ Each simulation mode will go through the list of vehicles specified in this sett
 ```
 
 ### Using PX4
-By default we use [simple_flight](simple_flight.md) so you don't have to do separate HITL or SITL setups. We also support ["PX4"](px4_setup.md) for advanced users. To use PX4 with AirSim, you can use the following for `Vehicles` setting:
+기본적으로 [simple_flight](simple_flight.md)를 사용하므로 별도의 HITL 또는 SITL 설정을 수행 할 필요가 없습니다. 또한 고급 사용자를 위해 ["PX4"](px4_setup.md)를 지원합니다. AirSim과 함께 PX4를 사용하려면 `Vehicles` 설정에 다음을 사용할 수 있습니다.
 
 ```
 "Vehicles": {
@@ -306,7 +307,7 @@ By default we use [simple_flight](simple_flight.md) so you don't have to do sepa
 
 #### Additional PX4 Settings
 
-The defaults for PX4 is to enable hardware-in-loop setup. There are various other settings available for PX4 as follows with their default values:
+PX4의 기본 값은 하드웨어 루프 설정을 활성화하는 것입니다. 다음과 같이 PX4에 사용할 수있는 다양한 다른 설정이 기본 값과 함께 있습니다.
 
 ```
 "Vehicles": {
@@ -336,37 +337,33 @@ The defaults for PX4 is to enable hardware-in-loop setup. There are various othe
 }
 ```
 
-These settings define the MavLink SystemId and ComponentId for the Simulator (SimSysID, SimCompID), and for an optional external renderer (ExtRendererSysID, ExtRendererCompID)
-and the node that allows remote control of the drone from another app this is called the Air Control node (AirControlSysID, AirControlCompID).
+이 설정은 시뮬레이터(SimSysID, SimCompID) 및 선택적 외부 렌더러(ExtRendererSysID, ExtRendererCompID)에 대한 MavLink SystemId 및 ComponentId를 정의합니다.
+다른 앱에서 드론을 원격으로 제어 할 수 있는 노드를 Air Control 노드(AirControlSysID, AirControlCompID)라고 합니다.
 
-If you want the simulator to also talk to your ground control app (like QGroundControl) you can also set the UDP address for that in case you want to run
-that on a different machine (QgcHostIp,QgcPort).
+시뮬레이터가 QGroundControl과 같은 지상 제어 앱과 통신하도록하려면 다른 컴퓨터 (QgcHostIp, QgcPort)에서 실행하려는 경우 UDP 주소를 설정할 수도 있습니다.
 
-You can connect the simulator to the LogViewer app, provided in this repo, by setting the UDP address for that (LogViewerHostIp,LogViewerPort).
+해당 리포지토리에 제공된 LogViewer 앱 (LogViewerHostIp, LogViewerPort)에 대한 UDP 주소를 설정하여 시뮬레이터를 LogViewer 앱에 연결할 수 있습니다.
 
-And for each flying drone added to the simulator there is a named block of additional settings.  In the above you see the default name "PX4".   You can change this name from the Unreal Editor when you add a new BP_FlyingPawn asset.  You will see these properties grouped under the category "MavLink". The MavLink node for this pawn can be remote over UDP or it can be connected to a local serial port.  If serial then set UseSerial to true, otherwise set UseSerial to false and set the appropriate bard rate.  The default of 115200 works with Pixhawk version 2 over USB.
+그리고 시뮬레이터에 추가 된 각 비행 용 드론에 대해 추가 설정의 명명 된 블록이 있습니다. 위의 기본 이름은 "PX4"입니다. 새로운 BP_FlyingPawn 애셋을 추가 할 때 Unreal 에디터에서 이 이름을 변경할 수 있습니다.  이러한 속성은 "MavLink"범주로 그룹화되어 표시됩니다. 이 폰(pawn)의 MavLink 노드는 UDP를 통해 원격이거나 로컬 시리얼 포트에 연결될 수 있습니다.  직렬 인 경우 UseSerial을 true로 설정하고, 그렇지 않으면 UseSerial을 false로 설정하고 적절한 전송률을 설정하십시오. 기본 115200은 USB를 통한 Pixhawk 버전 2에서 작동합니다.
 
-## Other Settings
+## 다른 설정
 
 ### EngineSound
-To turn off the engine sound use [setting](settings.md) `"EngineSound": false`. Currently this setting applies only to car.
+엔진 소리를 끄려면 `"EngineSound": false` [설정](settings.md)을 사용하십시오. 현재 이 설정은 자동차에만 적용됩니다.
 
 ### PawnPaths
-This allows you to specify your own vehicle pawn blueprints, for example, you can replace the default car in AirSim with your own car. Your vehicle BP can reside in Content folder of your own Unreal project (i.e. outside of AirSim plugin folder). For example, if you have a car BP located in file `Content\MyCar\MySedanBP.uasset` in your project then you can set `"DefaultCar": {"PawnBP":"Class'/Game/MyCar/MySedanBP.MySedanBP_C'"}`. The `XYZ.XYZ_C` is a special notation required to specify class for BP `XYZ`. Please note that your BP must be derived from CarPawn class. By default this is not the case but you can re-parent the BP using the "Class Settings" button in toolbar in UE editor after you open the BP and then choosing "Car Pawn" for Parent Class settings in Class Options. It's also a good idea to disable "Auto Possess Player" and "Auto Possess AI" as well as set AI Controller Class to None in BP details. Please make sure your asset is included for cooking in packaging options if you are creating binary.
+예를 들어 AirSim의 기본 차량을 자신의 차량으로 교체 할 수 있습니다. 차량 BP는 자신의 Unreal 프로젝트의 콘텐츠 폴더(즉, AirSim 플러그인 폴더 외부)에 있을 수 있습니다. 예를 들어, 프로젝트의 `Content\MyCar\MySedanBP.uasset` 파일에 자동차 BP가있는 경우 `"DefaultCar": {"PawnBP":"Class'/Game/MyCar/MySedanBP.MySedanBP_C'"}`를 설정할 수 있습니다. `XYZ.XYZ_C`는 BP `XYZ`에 대한 클래스를 지정하는 데 필요한 특수 표기법입니다. BP는 CarPawn 클래스에서 파생되어야 합니다. 기본적으로 이 경우는 아니지만 BP를 연 다음 클래스 옵션에서 상위 클래스 설정으로 "자동차 폰"을 선택한 후 UE 편집기의 도구 모음에서 "클래스 설정" 버튼을 사용하여 BP를 다시 보호 할 수 있습니다. BP 세부 사항에서 AI 컨트롤러 클래스를 없음으로 설정하고 "Auto Possess Player" 및 "Auto Possess AI"를 비활성화하는 것도 좋습니다. 바이너리를 생성하는 경우 패키징 옵션에 쿠킹 하려는 에셋이 포함되어 있는지 확인하십시오.
 
 ### PhysicsEngineName
-For cars, we support only PhysX for now (regardless of value in this setting). For multirotors, we support `"FastPhysicsEngine"` only.
+자동차의 경우 현재 이 설정의 값에 관계없이 PhysX 만 지원합니다. 멀티 로터의 경우 'FastPhysicsEngine'만 지원합니다.
 
 ### LocalHostIp Setting
-Now when connecting to remote machines you may need to pick a specific Ethernet adapter to reach those machines, for example, it might be
-over Ethernet or over Wi-Fi, or some other special virtual adapter or a VPN.  Your PC may have multiple networks, and those networks might not
-be allowed to talk to each other, in which case the UDP messages from one network will not get through to the others.
+이제 원격 시스템에 연결할 때 특정 이더넷 어댑터를 선택해야 할 수도 있습니다. 예를 들어 이더넷이나 Wi-Fi를 통해 연결할 수도 있고 다른 특수 가상 어댑터나 VPN을 통해 연결할 수도 있습니다. PC에 네트워크가 여러 개 있을 수 있으며 해당 네트워크가 서로 통신 할 수 없는 경우 한 네트워크의 UDP 메시지가 다른 네트워크로 전달되지 않습니다.
 
-So the LocalHostIp allows you to configure how you are reaching those machines.  The default of 127.0.0.1 is not able to reach external machines, 
-this default is only used when everything you are talking to is contained on a single PC.
+따라서 LocalHostIp를 사용하여 해당 머신에 도달하는 방법을 구성 할 수 있습니다. 기본값 127.0.0.1은 외부 시스템에 도달 할 수 없으며, 이 기본값은 대화하는 모든 것이 단일 PC에 포함 된 경우에만 사용됩니다.
 
 ### SpeedUnitFactor
-Unit conversion factor for speed related to `m/s`, default is 1. Used in conjunction with SpeedUnitLabel. This may be only used for display purposes for example on-display speed when car is being driven. For example, to get speed in `miles/hr` use factor 2.23694.
+`m/s`와 관련된 속도의 단위 변환 계수, 기본값은 1입니다. SpeedUnitLabel과 함께 사용됩니다. 이것은 자동차가 운전 중일 때의 on-display 속도와 같은 display 목적으로 만 사용될 수 있습니다. 예를 들어, 시간당 마일을 얻으려면 요소 2.23694를 사용하십시오.
 
 ### SpeedUnitLabel
-Unit label for speed, default is `m/s`.  Used in conjunction with SpeedUnitFactor.
+속도의 단위 레이블, 기본값은 `m / s`입니다. SpeedUnitFactor와 함께 사용됩니다.
