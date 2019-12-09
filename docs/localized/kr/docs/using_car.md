@@ -1,6 +1,6 @@
-# How to Use Car in AirSim
+# AirSim에서 자동차를 사용하는 방법
 
-By default AirSim prompts user for which vehicle to use. You can easily change this by setting [SimMode](settings.md#SimMode). For example, if you want to use car instead then just set the SimMode in your [settings.json](settings.md) which you can find in your `~/Documents/AirSim` folder, like this:
+기본적으로 AirSim은 어떤 차량을 사용할 것인지 묻습니다. [SimMode](settings.md#SimMode)를 설정하여 쉽게 변경할 수 있습니다. 예를 들어, 대신 자동차를 사용하려면 다음과 같이 `~/Documents/AirSim` 폴더에 있는 [settings.json](settings.md)에 SimMode를 설정하십시오:
 
 ```
 {
@@ -9,16 +9,16 @@ By default AirSim prompts user for which vehicle to use. You can easily change t
 }
 ```
 
-Now when you restart AirSim, you should see the car spawned automatically.
+이제 AirSim을 다시 시작하면 자동차가 자동으로 생성 된 것을 볼 수 있습니다.
 
-## Manual Driving 
-Please use the keyboard arrow keys to drive manually. Spacebar for the handbrake. In manual drive mode, gears are set in "auto".
+## 수동 드라이브
+키보드 방향키를 사용하여 수동으로 운전하십시오. 스페이스바는 핸드 브레이크 입니다. 수동 드라이브 모드에서 기어는 "자동"으로 설정됩니다.
 
-## Using APIs
-You can control the car, get state and images by calling APIs in variety of client languages including C++ and Python. Please see [APIs doc](apis.md) for more details.
+## API 사용
+C++ 및 Python을 포함한 다양한 클라이언트 언어로 API를 호출하여 자동차를 제어하고 상태 및 이미지를 얻을 수 있습니다. 자세한 내용은 [API 문서](apis.md)를 참조하십시오.
 
-## Changing Views
-By default camera will chase the car from the back. You can get the FPV view by pressing `F` key and switch back to chasing from back view by pressing `/` key. More keyboard shortcuts can be seen by pressing F1.
+## 뷰 변경
+기본적으로 카메라는 뒤에서 차를 쫓습니다. `F` 키를 눌러 FPV 뷰로 전환하고 `/`키를 눌러 백 뷰에서 추적으로 전환 할 수 있습니다. F1을 누르면 더 많은 키보드 단축키를 볼 수 있습니다.
 
-## Cameras
-By default car is installed with 5 cameras: center, left and right, driver and reverse. You can chose the images from these camera by specifying [the name](image_apis.md#available_cameras).
+## 카메라
+기본적으로 자동차는 5개의 카메라(중앙, 좌/우, 운전자 및 후방)가 설치됩니다. [이름](image_apis.md#available_cameras)을 지정하여 이 카메라에서 이미지를 선택할 수 있습니다.
