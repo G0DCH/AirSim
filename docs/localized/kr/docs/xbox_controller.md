@@ -1,32 +1,28 @@
-# XBox Controller
+# XBox 컨트롤러
 
-To use an XBox controller with AirSim follow these steps:
+AirSim과 함께 XBox 컨트롤러를 사용하려면 다음 단계를 따르십시오:
 
-1. Connect XBox controller so it shows up in your PC Game Controllers:
+1. PC 게임 컨트롤러에 XBox 컨트롤러가 표시되도록 연결하십시오:
 
 ![Gamecontrollers](images/game_controllers.png)
 
-2. Launch QGroundControl and you should see a new Joystick tab under stettings:
+2. QGroundControl을 시작하면 다음 설정 아래에 새 조이스틱 탭이 표시됩니다:
 
 ![Gamecontrollers](images/qgc_joystick.png)
 
-Now calibrate the radio, and setup some handy button actions.  For example, I set mine so that 
-the 'A' button arms the drone, 'B' put it in manual flight mode, 'X' puts it in altitude hold mode
-and 'Y' puts it in position hold mode.  I also prefer the feel of the controller when I check the
-box labelled "Use exponential curve on roll,pitch, yaw" because this gives me more sensitivity for
-small movements.]
+이제 라디오를 조정하고 몇 가지 편리한 버튼 동작을 설정하십시오. 예를 들어, 'A'버튼이 드론을 장착하고 'B'는 수동 비행 모드로 설정하고 'X'는 고도 고정 모드로 설정하고 'Y'는 위치 고정 모드로 설정하도록 컨트롤러를 설정합니다. 또한 " roll, pitch, yaw에 지수 곡선 사용 "이라고 표시된 박스를 체크 할 때 컨트롤러의 느낌이 더 좋습니다. 작은 움직임에도 민감하게 반응하기 때문입니다.
 
-QGroundControl will find your Pixhawk via the UDP proxy port 14550 setup by MavLinkTest above.
-AirSim will find your Pixhawk via the other UDP server port 14570 also setup by MavLinkTest above.
-You can also use all the QGroundControl controls for autonomous flying at this point too.
+QGroundControl은 위의 MavLinkTest에 의해 설정된 UDP 프록시 포트 14550을 통해 Pixhawk을 찾습니다.
+AirSim은 위의 MavLinkTest에서 설정 한 다른 UDP 서버 포트 14570을 통해 Pixhawk을 찾습니다.
+이 시점에서도 자율 비행을 위해 모든 QGroundControl 컨트롤을 사용할 수도 있습니다.
 
 
-3. Connect to Pixhawk serial port using MavLinkTest.exe like this:
+3. 다음과 같이 MavLinkTest.exe를 사용하여 Pixhawk 직렬 포트에 연결하십시오:
 ````
 MavLinkTest.exe -serial:*,115200 -proxy:127.0.0.1:14550 -server:127.0.0.1:14570
 ````
 
-4. Run AirSim Unreal simulator with these `~/Documents/AirSim/settings.json` settings:
+4. 이러한 `~/Documents/AirSim/settings.json` 설정으로 AirSim Unreal 시뮬레이터를 실행하십시오 :
 ```
 "Vehicles": {
     "PX4": {
@@ -41,12 +37,11 @@ MavLinkTest.exe -serial:*,115200 -proxy:127.0.0.1:14550 -server:127.0.0.1:14570
 }
 ```
 
-## Advanced
+## 고급
 
-If the Joystick tab doesn't show up in QGroundControl then Click on the purple "Q" icon on left in tool bar to reveal the Preferences panel.
-Go to General tab and check the Virtual Joystick checkbox.  Go back to settings screen (gears icon), click on Parameters tab,
-type `COM_RC_IN_MODE` in search box and change its value to either `Joystick/No RC Checks` or `Virtual RC by Joystick`.
+조이스틱 탭이 QGroundControl에 표시되지 않으면 도구 모음에서 왼쪽의 자주색 "Q"아이콘을 클릭하여 환경 설정 패널을 표시하십시오.
+일반 탭으로 이동하여 가상 조이스틱 체크박스를 선택하십시오. 설정 화면(톱니 아이콘)으로 돌아가서 매개 변수 탭을 클릭하고 검색 창에 `COM_RC_IN_MODE`를 입력 한 후 값을 `Joystick/No RC Checks` 또는 `Virtual RC by Joystick`으로 변경하십시오.
 
-### Other Options
+### 다른 옵션
 
-See [remote controller options](remote_control.md)
+[원격 컨트롤러 옵션](remote_control.md) 참조
