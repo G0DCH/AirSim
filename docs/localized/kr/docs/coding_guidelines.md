@@ -16,8 +16,8 @@
 | Namespace | under\_scored | 클래스 이름과 차별화 |
 | Class name | CamelCase | ISO가 권장하는 STL 유형과 구별하기 위해("C" 또는 "T" 접두어를 사용하지 마십시오) |
 | Function name | camelCase | 소문자 시작은 .Net 세계를 제외하고 거의 보편적입니다. |
-| Parameters/Locals | under\_scored | 표준의 대다수는 이것을 권장합니다. \_는 C++ 사용자가 더 읽기 쉽다 (Java/.Net 사용자는 아니지만) |
-| Member variables | under\_scored\_with\_ | 접두사 \_는 ISO에 \_identifiers를 예약하는 규칙이 있으므로 크게 권장하지 않습니다. 대신 접미사를 권장합니다 |
+| Parameters/Locals | under\_scored | 표준의 대다수는 이것을 권장합니다. \_는 C++ 사용자가 더 읽기 쉽습니다(Java/.Net 사용자는 아니지만). |
+| Member variables | under\_scored\_with\_ | 접두사 \_는 ISO에 \_identifiers를 예약하는 규칙이 있으므로 크게 권장하지 않습니다. 대신 접미사를 권장합니다. |
 | Enums and its members | CamelCase | 아주 오래된 표준을 제외한 대부분이 이것에 동의합니다 |
 | Globals | g\_under\_scored | 당신은 처음부터 이것을 가지고 있지 않아야합니다! |
 | Constants | UPPER\_CASE | 매우 논쟁적이어서, 클래스 또는 메소드의 private 상수가 아닌 경우 멤버 또는 로컬에 이름 지정을 사용하지 않는 한 여기에서 하나를 선택해야합니다. |
