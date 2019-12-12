@@ -1,35 +1,35 @@
-# PX4 Setup for AirSim
+# AirSim용 PX4 설정
 
-The [PX4 software stack](http://github.com/px4/firmware) is an open source very popular flight controller with support for wide variety of boards and sensors as well as built-in capability for higher level tasks such as mission planning. Please visit [px4.io](http://px4.io) for more information.
+[PX4 소프트웨어 스택](http://github.com/px4/firmware)은 광범위한 보드와 센서를 지원하고 미션 계획과 같은 고급 작업을 위한 내장 기능을 갖춘 널리 사용되는 오픈 소스 비행 컨트롤러입니다. 자세한 내용은 [px4.io] (http://px4.io)를 방문하십시오.
 
-**Warning**: While all releases of AirSim are always tested with PX4 to ensure the support, setting up PX4 is not a trivial task. Unless you have at least intermediate level of experience with PX4 stack, we recommend you use [simple_flight](simple_flight.md), which is now a default in AirSim. 
+**주의** : AirSim의 모든 릴리스는 항상 PX4로 테스트되어 지원을 보장하지만, PX4 설정은 쉬운 일이 아닙니다. PX4 스택에 대한 중간 수준의 경험이 없으면 [Simple_flight] (simple_flight.md)를 사용하는 것이 좋습니다. 이는 현재 AirSim의 기본값입니다.
 
-## Supported Hardware
+## 지원되는 하드웨어
 
-The following Pixhawk hardware has been tested with AirSim:
+다음 Pixhawk 하드웨어는 AirSim에서 테스트되었습니다.
 
 1. [3DR Pixhawk v2](https://3dr.com/support/pixhawk/)
 2. [3DR Pixhawk mini](https://store.3dr.com/products/3dr-pixhawk)
 2. [Pixhawk PX4 2.4.8](http://www.banggood.com/Pixhawk-PX4-2_4_8-Flight-Controller-32-Bit-ARM-PX4FMU-PX4IO-Combo-for-Multicopters-p-1040416.html)
 3. [PixFalcon](https://hobbyking.com/en_us/pixfalcon-micro-px4-autopilot.html?___store=en_us)
 4. [PixRacer](https://www.banggood.com/Pixracer-Autopilot-Xracer-V1_0-Flight-Controller-Mini-PX4-Built-in-Wifi-For-FPV-Racing-RC-Multirotor-p-1056428.html?utm_source=google&utm_medium=cpc_ods&utm_content=starr&utm_campaign=Smlrfpv-ds-FPVracer&gclid=CjwKEAjw9MrIBRCr2LPek5-h8U0SJAD3jfhtbEfqhX4Lu94kPe88Zrr62A5qVgx-wRDBuUulGzHELRoCRVTw_wcB)
-5. [Pixhawk 2.1](http://www.proficnc.com/) (using PX4 Flight Stack)
+5. [Pixhawk 2.1](http://www.proficnc.com/) (PX4 Flight Stack 사용)
 
-The 3DR Pixhawk Mini works out of the box, the others you may need to re-flash with the latest firmware.
+3DR Pixhawk Mini는 기본적으로 작동하며 다른 펌웨어는 최신 펌웨어로 re-flash해야 할 수도 있습니다.
 
-## Setting up PX4 Hardware-in-Loop
+## PX4 Hardware-in-Loop 설정
 
-For this you will need one of the supported device listed above. For manual flight you will also need RC + transmitter.
+이를 위해 위에 나열된 지원 장치 중 하나가 필요합니다. 수동 비행의 경우 RC 와 송신기도 필요합니다.
 
-1. Make sure your RC receiver is bound with its RC transmitter. Connect the RC transmitter to the flight controller's RC port. Refer to your RC manual and [PX4 docs](https://docs.px4.io/en/getting_started/rc_transmitter_receiver.html) for more information.
-2. Download [QGroundControl](http://qgroundcontrol.com/), launch it and connect your flight controller to the USB port.
-3. Use QGroundControl to flash the latest PX4 Flight Stack.
-See also [initial firmware setup video](https://dev.px4.io/starting-initial-config.html).
-4. In QGroundControl, configure your Pixhawk for HIL simulation by selecting the HIL Quadrocopter X airframe.  After PX4 reboots, check that "HIL Quadrocopter X" is indeed selected.
-5. In QGroundControl, go to Radio tab and calibrate (make sure the remote control is on and the receiver is showing the indicator for the binding). 
-6. Go to the Flight Mode tab and chose one of the remote control switches as "Mode Channel". Then set (for example) Stabilized and Attitude flight modes for two positions of the switch.
-7. Go to the Tuning section of QGroundControl and set appropriate values. For example, for Fly Sky's FS-TH9X remote control, the following settings give a more realistic feel: Hover Throttle = mid+1 mark, Roll and pitch sensitivity = mid-3 mark, Altitude and position control sensitivity = mid-2 mark.
-8. In [AirSim settings](settings.md) file, specify PX4 for your vehicle config like this:
+1. RC 수신기가 RC 송신기와 연결되어 있는지 확인하십시오. RC 송신기를 비행 컨트롤러의 RC 포트에 연결하십시오. 자세한 내용은 RC 설명서 및 [PX4 문서](https://docs.px4.io/en/getting_started/rc_transmitter_receiver.html)를 참조하십시오.
+2. [QGroundControl](http://qgroundcontrol.com/)을 다운로드하고 실행 한 후 비행 컨트롤러를 USB 포트에 연결하십시오.
+3. QGroundControl을 사용하여 최신 PX4 Flight Stack을 플래시하십시오.
+[초기 펌웨어 설정 비디오](https://dev.px4.io/starting-initial-config.html) 참조.
+4. QGroundControl에서 HIL Quadrocopter X 기체를 선택하여 Pixhawk for HIL 시뮬레이션을 구성하십시오. PX4 재부팅 후 "HIL Quadrocopter X"가 선택되어 있는지 확인하십시오.
+5. QGroundControl에서 라디오 탭으로 이동하여 보정하십시오 (리모콘이 켜져 있고 수신기에 바인딩 표시기가 있는지 확인하십시오).
+6. 비행 모드 탭으로 이동하여 리모콘 스위치 중 하나를 "모드 채널"로 선택하십시오. 그런 다음 (예를 들어) 스위치의 두 위치에 대해 안정화 및 자세 비행 모드를 설정하십시오
+7. QGroundControl의 튜닝 섹션으로 이동하여 적절한 값을 설정하십시오. 예를 들어, Fly Sky의 FS-TH9X 리모컨의 경우 다음 설정이 보다 사실적인 느낌을 줍니다: Hover Throttle = mid+1 mark, Roll and pitch sensitivity = mid-3 mark, Altitude and position control sensitivity = mid-2 mark.
+8. [AirSim settings](settings.md) 파일에서 차량 구성에 PX4를 다음과 같이 지정하십시오.
 ```
 {
   "SettingsVersion": 1.2,
@@ -42,66 +42,55 @@ See also [initial firmware setup video](https://dev.px4.io/starting-initial-conf
 }
 ```
 
-After above setup you should be able to use RC to fly in the AirSim. You can usually arm the vehicle by lowering and bringing two sticks of RC together in-wards. You don't need QGroundControl after the initial setup. Typically the Stabilized (instead of Manual) mode gives better experience for beginners.
+위의 설정 후에 RC를 사용하여 AirSim을 비행 할 수 있습니다. 일반적으로 RC 스틱 2개를 내리고 안쪽으로 가져와 차량을 장착 할 수 있습니다. 초기 설정 후 QGroundControl이 필요하지 않습니다. 일반적으로 (수동 대신) 안정화 모드는 초보자에게 더 나은 경험을 제공합니다.
 
-You can also control the drone from [Python APIs](apis.md).
+[Python API](apis.md)에서 드론을 제어 할 수도 있습니다.
 
-See [Walkthrough Demo Video](https://youtu.be/HNWdYrtw3f0) and  [Unreal AirSim Setup  Video](https://youtu.be/1oY8Qu5maQQ) that shows you all the setup steps in this document.
+이 문서의 모든 설정 단계를 보여주는 [Walkthrough 데모 비디오](https://youtu.be/HNWdYrtw3f0) 및 [Unreal AirSim 설정 비디오](https://youtu.be/1oY8Qu5maQQ)를 참조하십시오.
 
-## Setting up PX4 Software-in-Loop
-The PX4 SITL mode doesn't require you to have separate device such as a Pixhawk or Pixracer. This is in fact the recommended way to use PX4 with simulators by PX4 team. However, this is indeed harder to set up. Please see [this dedicated page](px4_sitl.md) for setting up PX4 in SITL mode.
+## PX4 Software-in-Loop 설정
+PX4 SITL 모드에는 Pixhawk 또는 Pixracer와 같은 별도의 장치가 필요하지 않습니다. 실제로 PX4 팀의 시뮬레이터와 함께 PX4를 사용하는 것이 좋습니다. 그러나 이것은 실제로 설정하기가 더 어렵습니다. SITL 모드에서 PX4를 설정하려면 [전용 페이지](px4_sitl.md)를 참조하십시오.
 
 ## FAQ
 
-#### Drone doesn't fly properly, it just goes "crazy".
+#### 드론은 제대로 비행하지 않고, "미친 듯이" 돌아다닙니다.
 
-There are a few reasons that can cause this. First, make sure your drone doesn't fall down large distance when starting the simulator. This might happen if you have created a custom Unreal environment and Player Start is placed too high above the ground. It seems that when this happens internal calibration in PX4 gets confused. 
+이 문제를 일으킬 수 있는 몇 가지 이유가 있습니다. 먼저 시뮬레이터를 시작할 때 드론이 멀리 떨어지지 않도록 하십시오. 커스텀 Unreal 환경을 만들었고 플레이어 시작 지점이 지면 위에 너무 높은 곳에 있는 경우에 발생할 수 있습니다. 이 경우 PX4의 내부 조정이 혼동되는 것 같습니다.
 
-You should also use QGroundControl and make sure you can arm and takeoff in QGroundControl properly.
+또한 QGroundControl을 사용해야하며 QGroundControl을 올바르게 장착하고 이륙 할 수 있어야합니다.
 
-Finally, this also can be a machine performance issue in some rare cases, check your [hard drive performance](hard_drive.md).
+마지막으로, 이는 드문 경우지만 기계 성능 문제 일 수 있습니다. [하드 드라이브 성능](hard_drive.md)를 확인하십시오.
 
-#### Can I use Arducopter or other MavLink implementations?
+#### Arducopter 또는 다른 MavLink 구현을 사용할 수 있습니까?
 
-Our code is tested with the [PX4 firmware](https://dev.px4.io/). We have not tested Arducopter or other mavlink implementations. Some of the flight API's do use the
-PX4 custom modes in the MAV_CMD_DO_SET_MODE messages (like PX4_CUSTOM_MAIN_MODE_AUTO)
+우리의 코드는 [PX4 펌웨어](https://dev.px4.io/)로 테스트되었습니다. 우리는 Arducopter 또는 다른 mavlink 구현을 테스트하지 않았습니다. 일부 비행 API는 MAV_CMD_DO_SET_MODE 메시지 (예 : PX4_CUSTOM_MAIN_MODE_AUTO)에서 PX4 사용자 지정 모드를 사용합니다.
 
-#### It is not finding my Pixhawk hardware
+#### Pixhawk 하드웨어를 찾지 못합니다.
 
-Check your settings.json file for this line "SerialPort":"*,115200".  The asterisk here means "find any 
-serial port that looks like a Pixhawk device, but this doesn't always work for all types of Pixhawk hardware.
-So on Windows you can find the actual COM port using Device Manager, look under "Ports (COM & LPT), plug the 
-device in and see what new COM port shows up.  Let's say you see a new port named "USB Serial Port (COM5)". 
-Well, then change the SerialPort setting to this: "SerialPort":"COM5,115200".  
+settings.json 파일에서 "SerialPort":"*,115200" 줄을 확인하십시오. 여기서 별표는 "Pixhawk 장치처럼 보이는 직렬 포트를 찾지만 모든 유형의 Pixhawk 하드웨어에서 항상 작동하는 것은 아닙니다"를 의미합니다.
+따라서 Windows에서는 장치 관리자를 사용하여 실제 COM 포트를 찾을 수 있습니다. "포트(COM & LPT)"에서 장치를 연결하고 새로운 COM 포트가 나타나는지 확인하십시오. "USB Serial Port(COM5)"라는 새 포트가 있다고 가정 해 봅시다.
+그런 다음 SerialPort 설정을 "SerialPort":"COM5,115200"로 변경하십시오.
 
-On Linux, the device can be found by running "ls /dev/serial/by-id" if you see a device name listed that looks
-like this `usb-3D_Robotics_PX4_FMU_v2.x_0-if00` then you can use that name to connect, like this:
-"SerialPort":"/dev/serial/by-id/usb-3D_Robotics_PX4_FMU_v2.x_0-if00".  Note this long name is actually a symbolic link to the real 
-name, if you use "ls -l ..." you can find that symbolic link, it is usually something like "/dev/ttyACM0",
-so this will also work "SerialPort":"/dev/ttyACM0,115200".  But that mapping is similar to windows, it is
-automatically assigned and can change, whereas the long name will work even if the actual TTY serial device
-mapping changes.
+Linux에서 "usb-3D_Robotics_PX4_FMU_v2.x_0-if00"과 같은 장치 이름이 표시되면 해당 이름을 사용하여 연결할 수 있는 경우 "ls /dev/serial/by-id"를 실행하여 다음과 같이 장치를 찾을 수 있습니다 :
+"SerialPort":"/dev/serial/by-id/usb-3D_Robotics_PX4_FMU_v2.x_0-if00". 이 긴 이름은 실제로 실제 이름에 대한 심볼릭 링크입니다. "ls -l ..."을 사용하는 경우 일반적으로 "/dev/ttyACM0"와 같은 해당 심볼릭 링크를 찾을 수 있습니다. 따라서 "SerialPort":"/dev/ttyACM0,115200"와 마찬가지로 동작합니다. 그러나 이 매핑은 windows와 유사하며 자동으로 할당되어 변경 될 수 있지만 실제 TTY 직렬 장치 매핑이 변경되더라도 긴 이름은 작동합니다.
 
 #### WARN  [commander] Takeoff denied, disarm and re-try
 
-This happens if you try and take off when  PX4 still has not computed the home position.  PX4 will report the home
-position once it is happy with the GPS signal, and you will see these messages:
+이것은 PX4가 아직 원점 위치를 계산하지 않았을 때 이륙하려고 하면 발생합니다. GPS 신호에 만족하면 PX4가 홈 위치를 보고하고 다음 메시지가 표시됩니다:
 
 ```
 INFO  [commander] home: 47.6414680, -122.1401672, 119.99
 INFO  [tone_alarm] home_set
 ```
 
-Up until this point in time, however, the PX4 will reject takeoff commands.
+그러나 이 시점까지 PX4는 이륙 명령을 거부합니다.
 
-#### When I tell the drone to do something it always lands
+#### 드론에게 무언가를 하도록 지시하면 항상 착륙합니다
 
-For example, you use DroneShell `moveToPosition -z -20 -x 50 -y 0` which it does, but when it gets to the target location the
-drone starts to land.  This is the default behavior of PX4 when offboard mode completes.  To set the drone to hover instead
-set this PX4 parameter:
+예를 들어 DroneShell `moveToPosition -z -20 -x 50 -y 0`을 사용하지만, 목표 위치에 도달하면 드론이 착륙하기 시작합니다. 이것은 오프 보드 모드가 완료 될 때 PX4의 기본 동작입니다. 드론이 호버링 하도록 설정하려면 이 PX4 파라미터를 설정하십시오 :
 ```
 param set COM_OBL_ACT 1
 ```
 
-#### I get message length mismatches errors
-You might need to set MAV_PROTO_VER parameter in QGC to "Always use version 1". Please see [this issue](https://github.com/Microsoft/AirSim/issues/546) more details.
+#### message length mismatches errors 가 발생합니다.
+QGC의 MAV_PROTO_VER 매개 변수를 "Always use version 1"로 설정해야합니다. 자세한 내용은 [이 이슈](https://github.com/Microsoft/AirSim/issues/546)를 참조하십시오.
