@@ -1,11 +1,10 @@
-# Setting up PX4 Software-in-Loop
+# PX4 Software-in-Loop 설정
 
-The [PX4](http://dev.px4.io) software provides a "software-in-loop" simulation (SITL) version of their stack that runs in Linux. Sorry it doesn't run in Windows, but if you install [BashOnWindows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
-you can build and run it there.
+[PX4](http://dev.px4.io) 소프트웨어는 Linux에서 실행되는 스택의 "SITL(Software-in-loop) 시뮬레이션" 버전을 제공합니다. Windows에서는 실행되지 않지만, [BashOnWindows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)를 설치하면 빌드하고 실행할 수 있습니다.
 
-1. From your Linux bash terminal follow [these steps for Linux](http://dev.px4.io/starting-installing-linux.html) and follow **all** the instructions under `NuttX based hardware` to install prerequisites. We've also included out own copy of the [PX4 build instructions](px4_build.md) which is a bit more concise about what we need exactly.
+1. Linux bash 터미널에서 [Linux의 다음 단계](http://dev.px4.io/starting-installing-linux.html)를 따르고 `NuttX 기반 하드웨어`의 지시 사항을 **모두** 따라 전제 조건을 설치하십시오. 우리는 또한 정확히 필요한 것에 대해 좀 더 간결한 [PX4 빌드 지침](px4_build.md) 사본을 포함 시켰습니다.
 
-2. Get the PX4 source code and build the posix SITL version of PX4:
+2. PX4 소스 코드를 얻고 posix SITL 버전의 PX4를 빌드하십시오:
     ```
     mkdir -p PX4
     cd PX4
@@ -13,13 +12,13 @@ you can build and run it there.
     cd Firmware
     git checkout v1.8.2  # Pick a well known "good" release tag.
     ```
-3. Use following command to build and start PX4 firmware in SITL mode:
+3. SITL 모드에서 PX4 펌웨어를 빌드하고 시작하려면 다음 명령을 사용하십시오:
     ```
     make posix_sitl_ekf2  none_iris
     ```
-4. You should see a message like this you `INFO  [simulator] Waiting for initial data on UDP port 14560` which means the SITL PX4 app is waiting for someone to connect.
-5. Now edit [AirSim settings](settings.md) file to make sure you have followings:
-    ```json
+4. `INFO  [simulator] Waiting for initial data on UDP port 14560`과 같은 메시지가 표시되어야 합니다. 이는 SITL PX4 앱이 누군가의 연결을 기다리고 있음을 의미합니다.
+5. 이제 [AirSim settings](settings.md) 파일을 편집하여 다음이 있는지 확인하십시오.
+    ---json
     {
         "SettingsVersion": 1.2,
         "SimMode": "Multirotor",
@@ -32,67 +31,67 @@ you can build and run it there.
     }
 }
 
-    ```
-6. Run Unreal environment and it should connect to SITL via UDP.  You should see a bunch of messages from the SITL PX4 window from things like `[mavlink]` and `[commander]` and so on.
-7. You should also be able to use QGroundControl just like with flight controller hardware. Note that as we don't have physical board, RC cannot be connected directly to it. So the alternatives are either use XBox 360 Controller or connect your RC using USB (for example, in case of FrSky Taranis X9D Plus) or using trainer USB cable to PC. This makes your RC look like joystick. You will need to do extra set up in QGroundControl to use virtual joystick for RC control.
+    ---
+6. Unreal 환경을 실행하고 UDP를 통해 SITL에 연결해야합니다. SITL PX4 창에서 `[mavlink]` 및 `[commander]` 등의 메시지가 많이 나타납니다.
+7. 비행 컨트롤러 하드웨어와 마찬가지로 QGroundControl을 사용할 수도 있습니다. 물리적 보드가 없으므로 RC를 직접 연결할 수 없습니다. 따라서 대안은 XBox 360 컨트롤러를 사용하거나 USB(예: FrSky Taranis X9D Plus의 경우)를 사용하거나 트레이너 USB 케이블을 PC에 사용하여 RC를 연결하는 것입니다. 그러면 RC가 조이스틱처럼 보입니다. RC 제어에 가상 조이스틱을 사용하려면 QGroundControl에서 추가 설정을 수행해야합니다.
 
-## Setting GPS origin
+## GPS 원점 설정
 
-PX4 SITL mode needs to be configured to get the home location correct.  Run the following in the PX4 console window so that the origin matches that which is setup in AirSim AVehiclePawnBase::HomeLatitude and HomeLongitude.
+홈 위치가 정확하도록 PX4 SITL 모드를 구성해야 합니다. 원본이 AirSim AVehiclePawnBase::HomeLatitude 및 HomeLongitude에 설정된 것과 일치하도록 PX4 콘솔 창에서 다음을 실행하십시오.
 
 ````
 param set LPE_LAT 47.641468
 param set LPE_LON -122.140165
 ````
 
-You might also want to set this one so that the drone automatically hovers after each offboard control command (the default setting is to land):
+또한 각 오프 보드 제어 명령 후 드론이 자동으로 호버링 하도록 이 설정을 지정할 수도 있습니다(기본 설정은 착륙).
 
 ````
 param set COM_OBL_ACT 1
 ````
 
-Now close Unreal app, restart the `px4` app and re-start the unreal app.  In fact, every time you stop the unreal app you have top restart the `px4` app.
+이제 Unreal 앱을 닫고 `px4` 앱을 다시 시작한 다음 Unreal 앱을 다시 시작하십시오.  In fact, every time you stop the unreal app you have top restart the `px4` app.
 
-## Check the Home Position
+## 홈 위치 확인
 
-If you are using DroneShell to execute commands (arm, takeoff, etc) then you should wait until the Home position is set. You will see the PX4 SITL console output this message:
+DroneShell을 사용하여 명령(arm, 이륙 등)을 실행하는 경우 홈 위치가 설정 될 때까지 기다려야 합니다. PX4 SITL 콘솔이 이 메시지를 출력 한 것을 볼 수 있습니다:
 
 ````
 INFO  [commander] home: 47.6414680, -122.1401672, 119.99
 INFO  [tone_alarm] home_set
 ````
 
-Now DroneShell 'pos' command should report this position and the commands should be accepted by PX4.  If you attempt to takeoff without a home position you will see the message:
+이제 DroneShell 'pos' 명령이 이 위치를 보고해야하며 PX4에서 명령을 승인해야합니다. 홈 포지션 없이 이륙을 시도하면 다음과 같은 메시지가 나타납니다.
 
 ````
 WARN  [commander] Takeoff denied, disarm and re-try
 ````
 
-After home position is set check the local position reported by 'pos' command :
+원점 위치가 설정되면 'pos' 명령으로 보고 된 로컬 위치를 확인하십시오:
 
 ````
 Local position: x=-0.0326988, y=0.00656854, z=5.48506
 ````
 
-If the z coordinate is large like this then takeoff might not work as expected.  Resetting the SITL and simulation should fix that problem.
+z 좌표가 이와 같이 크면 이륙이 예상대로 작동하지 않을 수 있습니다. SITL 및 시뮬레이션을 재설정하면 해당 문제가 해결됩니다.
 
-## No Remote Control
+## 리모콘 없음
 
-If you plan to fly with no remote control, just using DroneShell commands for example, then you will need to set the following parameters to stop the PX4 from triggering "failsafe mode on" every time a move command is finished.
+예를 들어 DroneShell 명령을 사용하여 원격 제어없이 비행하려는 경우 이동 명령이 완료 될 때마다 PX4가 "failsafe mode on"을 트리거하지 않도록 다음 매개 변수를 설정해야합니다.
 
 ````
 param set NAV_RCL_ACT 0
 param set NAV_DLL_ACT 0
 ````
 
-NOTE: Do `NOT` do this on a real drone as it is too dangerous to fly without these failsafe measures.
+참고 :이 안전 장치 없이 비행하기에는 너무 위험하므로 실제 무인 항공기에서는 이 작업을 수행하지 `마십시오`.
 
-## Using VirtualBox Ubuntu
+## VirtualBox Ubuntu 사용
 
-If you want to run the above posix_sitl in a `VirtualBox Ubuntu` machine then it will have a different ip address from localhost. So in this case you need to edit the [settings file](settings.md) and change the UdpIp and SitlIp to the ip address of your virtual machine
-set the  LocalIpAddress to the address of your host machine running the Unreal engine. 
+`VirtualBox Ubuntu` 머신에서 위의 posix_sitl을 실행하려면 localhost와 다른 IP 주소를 갖습니다. 따라서 이 경우 [설정 파일](settings.md)을 편집하고 UdpIp 및 SitlIp를 가상 머신의 IP 주소로 변경해야 합니다.
+LocalIpAddress를 Unreal 엔진을 실행하는 호스트 머신의 주소로 설정하십시오. 
 
-## Remote Controller
+## 원격 컨트롤러
 
-There are several options for flying the simulated drone using a remote control or joystick like xbox gamepad. See [remote controllers](remote_control.md#RC_Setup_for_PX4)
+리모컨이나 xbox 게임 패드와 같은 조이스틱을 사용하여 시뮬레이션 드론을 비행하는 데는 몇 가지 옵션이 있습니다. [원격 컨트롤러](remote_control.md#RC_Setup_for_PX4) 참조
 
