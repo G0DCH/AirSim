@@ -1,34 +1,34 @@
 # simple_flight
 
- If you don't know what flight controller does than see [What is Flight Controller?](flight_controller.md). 
+ 비행 컨트롤러의 기능을 모르는 경우 [비행 컨트롤러란 무엇입니까?](flight_controller.md)를 참조하십시오.
  
- AirSim has built-in flight controller called simple_flight and it is used by default. You don't need to do anything to use or configure it. AirSim also supports [PX4](px4_setup.md) as another flight controller for advanced users. In future, we also plan to support [ROSFlight](https://rosflight.org/) and [Hackflight](https://github.com/simondlevy/hackflight).
+ AirSim에는 simple_flight라는 내장 비행 컨트롤러가 있으며 기본적으로 사용됩니다. 사용하거나 구성하기 위해 아무 것도 할 필요가 없습니다. AirSim은 고급 사용자를 위한 다른 비행 컨트롤러로 [PX4](px4_setup.md)도 지원합니다. 향후에는 [ROSFlight](https://rosflight.org/) 및 [Hackflight](https://github.com/simondlevy/hackflight)도 지원할 계획입니다.
 
-## Advantages
+## 장점
 
-The advantage of using simple_flight is zero additional setup you need to do and it "just works". Also, simple_flight uses steppable clock which means you can pause the simulation and things are not at mercy of high variance low precision clock that operating system provides. Further, simple_flight is simple, cross platform and 100% header-only dependency-free C++ code which means you can literally step through from simulator to inside flight controller code within same code base!
+simple_flight를 사용하면 추가로 설정 할 필요 없이 "제대로 작동" 한다는 장점이 있습니다. 또한 simple_flight는 steppable clock을 사용하므로 시뮬레이션을 일시 중지 할 수 있으며 운영 체제가 제공하는 고분산 저정밀 클록에 적합하지 않습니다. 또한 simple_flight는 단순하고 크로스 플랫폼이며 100% 헤더 전용 종속성이 없는 C++ 코드이므로 문자 그대로 동일한 코드 기반의 시뮬레이터에서 비행 컨트롤러 코드 내부로 단계적으로 이동할 수 있습니다!
 
-## Design
+## 디자인
 
-Normally flight controllers are designed to run on actual hardware on vehicles and their support for running in simulator varies widely. They are often fairly difficult to configure for non-expert users and typically have complex build usually lacking cross platform support. All these problems have played significant part in design of simple_flight.
+일반적으로 비행 컨트롤러는 차량의 실제 하드웨어에서 실행되도록 설계되었으며 시뮬레이터에서의 실행 지원은 매우 다양합니다. 전문가가 아닌 사용자를 위해 구성하기가 상당히 어려우며 일반적으로 크로스 플랫폼 지원이 부족한 복잡한 빌드가 있습니다. 이 모든 문제는 simple_flight 설계에서 중요한 역할을 했습니다.
 
-simple_flight is designed from ground up as library with clean interface that can work onboard the vehicle as well as simulator. The core principle is that flight controller has no way to specify special simulation mode and there for it has no way to know if it is running under simulation or real vehicle. We thus view flight controller simply as collection of algorithms packaged in a library. Another key emphasis is to develop this code as dependency free header-only pure standard C++11 code. This means there is no special build required to compile simple_flight. You just copy its source code to any project you wish and it just works.
+simple_flight는 차량뿐만 아니라 시뮬레이터에서도 작동 할 수있는 깔끔한 인터페이스를 갖춘 라이브러리로 처음부터 설계되었습니다. 핵심 원칙은 비행 컨트롤러가 특수 시뮬레이션 모드를 지정할 방법이 없으며 시뮬레이션 또는 실제 차량에서 실행 중인지 알 수 없다는 것입니다. 따라서 비행 컨트롤러를 단순히 라이브러리에 패키지 된 알고리즘 모음으로 간주합니다. 또 다른 주요 강조점은 이 코드를 종속성이없는 헤더 전용 순수 표준 C++11 코드로 개발하는 것입니다. 이는 simple_flight를 컴파일하는 데 특별한 빌드가 필요하지 않음을 의미합니다. 소스 코드를 원하는 프로젝트에 복사하면 작동합니다.
 
-## Control
+## 조작
 
-simple_flight can control vehicle by taking in desired input as angle rate, angle level, velocity or position. Each axis of control can be specified with one of these modes. Internally simple_flight uses cascade of PID controllers to finally generate actuator signals. This means position PID drives velocity PID which drives angle level PID which finally drives angle rate PID.
+simple_flight는 각도 입력, 각도 레벨, 속도 또는 위치로 원하는 입력을 받아 차량을 제어 할 수 있습니다. 각 제어 축은 다음 모드 중 하나로 지정할 수 있습니다. 내부적으로 simple_flight는 일련의 PID 컨트롤러를 사용하여 최종적으로 액추에이터 신호를 생성합니다. 이것은 위치 PID가 속도 PID를 구동하여 각도 레벨 PID를 구동하고 최종적으로 각도 속도 PID를 구동하는 것을 의미합니다.
 
-## State Estimation
+## 상태 추정
 
-In current release we are using ground truth from simulator for our state estimation. We plan to add complimentary filter based state estimation for angular velocity and orientation using 2 sensors (gyroscope, accelerometer) in near future. In more longer term, we plan to integrate another library to do velocity and position estimation using 4 sensors (gyroscope, accelerometer, magnetometer and barometer) using EKF. If you have experience this area than we encourage you to engage with us and contribute!
+현재 릴리스에서는 상태 추정을 위해 시뮬레이터의 기본 정보를 사용하고 있습니다. 가까운 시일 내에 2개의 센서 (자이로스코프, 가속도계)를 사용하여 각속도 및 방향에 대한 무료 필터 기반 상태 추정을 추가 할 계획입니다. 장기적으로는 EKF를 사용하여 4개의 센서 (자이로스코프, 가속도계, 자력계 및 기압계)를 사용하여 속도 및 위치 추정을 수행하기 위해 다른 라이브러리를 통합 할 계획입니다. 이 분야에 경험이 있으시면 저희와 함께 참여하여 기여 해주십시오!
 
-## Supported Boards
+## 지원되는 보드
 
-Currently we have implemented simple_flight interfaces for simulated board. We plan to implement it for Pixhawk V2 board and possibly Naze32 board. We expect all our code to remain unchanged and the implementation would mainly involve adding drivers for various sensors, handling ISRs and managing other board specific details. If you have experience this area than we encourage you to engage with us and contribute!
+현재 우리는 시뮬레이션 보드를 위해 simple_flight 인터페이스를 구현했습니다. Pixhawk V2 보드 및 가능하면 Naze32 보드 용으로 구현할 계획입니다. 우리는 모든 코드가 변경되지 않을 것으로 예상하고 구현에는 주로 다양한 센서 용 드라이버 추가, ISR 처리 및 기타 보드 별 세부 정보 관리가 포함됩니다. 이 분야에 경험이 있으시면 저희와 함께 참여하여 기여해주십시오!
 
-## Configuration
+## 구성
 
-To have AirSim use simple_flight, you can specify it in [settings.json](settings.md) as shown below. Note that this is default so you don't have to do it explicitly.
+AirSim이 simple_flight를 사용하도록하려면 아래와 같이 [settings.json] (settings.md)에서 지정할 수 있습니다. 이것이 기본값이므로 명시적으로 수행 할 필요가 없습니다.
 
 ```
 "Vehicles": {
@@ -38,7 +38,7 @@ To have AirSim use simple_flight, you can specify it in [settings.json](settings
 }
 ```
 
-By default, vehicle using simple_flight is already armed which is why you would see propellers spinning. However if you don't want that than set `DefaultVehicleState` to `Inactive` like this:
+기본적으로 simple_flight를 사용하는 차량이 이미 준비되어 있으므로 프로펠러가 회전하는 것을 볼 수 있습니다. 그러나 이것을 원하지 않으면 `DefaultVehicleState`를 `Inactive`로 설정하십시오.
 
 ```
 "Vehicles": {
@@ -49,9 +49,9 @@ By default, vehicle using simple_flight is already armed which is why you would 
 }
 ```
 
-In this case, you will need to either manually arm using RC sticks in down inward position or using APIs.
+이 경우 RC 스틱을 사용하여 아래쪽으로 안쪽으로 향하거나 API를 사용하여 수동으로 장착해야합니다.
 
-For safety reasons, flight controllers would disallow API control unless human operator has consented using a switch on RC. Also, when RC control is lost, vehicle should disable API control and enter hover mode for safety reasons. To simplify things a bit, simple_flight enables API control without human consent using RC and even when RC is not detected by default however you can change this using following setting:
+안전상의 이유로, 비행 컨트롤러는 작업자가 RC의 스위치 사용에 동의하지 않는 한 API 제어를 허용하지 않습니다. 또한 RC 제어가 손실되면 차량은 안전상의 이유로 API 제어를 비활성화하고 호버 모드로 전환해야합니다. 일을 조금 단순화하기 위해 simple_flight는 RC를 사용하여 사람의 동의없이 API를 제어 할 수 있으며 RC가 기본적으로 감지되지 않더라도 다음 설정을 사용하여 이를 변경할 수 있습니다.
 
 ```
 "Vehicles": {
@@ -67,7 +67,7 @@ For safety reasons, flight controllers would disallow API control unless human o
 }
 ```
 
-Finally, simple_flight uses steppable clock by default which means clock advances when simulator tells it to advance (unlike wall clock which advances strictly according to passage of time). This means clock can be paused, for example, if code hits the break point and there is zero variance in clock (clock APIs provides by operating system might have significant variance unless its "real time" OS). If you want simple_flight to use wall clock instead than use following settings:
+마지막으로, simple_flight는 기본적으로 steppable clock을 사용합니다. 이는 시뮬레이터가 진행하도록 지시 할 때 (시간 경과에 따라 엄격하게 진행되는 wall clock과 달리)클록이 진행됨을 의미합니다. 예를 들어, 코드가 중단점에 도달하고 클록에 편차가 없는 경우 클록이 일시 정지 될 수 있음을 의미합니다(운영 체제에서 제공하는 클록 API는 "실시간" OS가 아닌 한 상당한 변동이 있을 수 있음). simple_flight가 wall clock을 대신 사용하도록 하려면 다음 설정을 따르십시오:
 
 ```
   "ClockType": "ScalableClock"
