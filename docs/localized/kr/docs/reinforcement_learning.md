@@ -1,26 +1,26 @@
-# Reinforcement Learning in AirSim
+# AirSim의 강화 학습
 
-We below describe how we can implement DQN in AirSim using CNTK. The easiest way is to first install python only CNTK ([instructions](https://docs.microsoft.com/en-us/cognitive-toolkit/setup-windows-python?tabs=cntkpy22)).
+아래에서는 CNTK를 사용하여 AirSim에서 DQN을 구현하는 방법에 대해 설명합니다. 가장 쉬운 방법은 먼저 파이썬 전용 CNTK를 설치 하는 것입니다([명령](https://docs.microsoft.com/en-us/cognitive-toolkit/setup-windows-python?tabs=cntkpy22)).
 
-CNTK provides several demo examples of [deep RL](https://github.com/Microsoft/CNTK/tree/master/Examples/ReinforcementLearning). We will modify the DeepQNeuralNetwork.py to work with AirSim. We can utilize most of the classes and methods corresponding to the DQN algorithm. However, there are certain additions we need to make for AirSim.
+CNTK는 [deep RL](https://github.com/Microsoft/CNTK/tree/master/Examples/ReinforcementLearning)의 몇 가지 데모 예제를 제공합니다. AirSim과 작동하도록 DeepQNeuralNetwork.py를 수정합니다. 우리는 DQN 알고리즘에 해당하는 대부분의 클래스와 메소드를 활용할 수 있습니다. 그러나 AirSim을 위해 추가해야 할 사항이 있습니다.
 
 #### Disclaimer
-This is still in active development. What we share below is a framework that can be extended and tweaked to obtain better performance.
+이것은 여전히 ​​활발히 개발 중입니다. 아래에서 공유하는 것은 더 나은 성능을 얻기 위해 확장 및 조정 가능한 프레임 워크입니다.
 
-## RL with Car
+## 자동차의 RL
 
 [Source code](https://github.com/Microsoft/AirSim/tree/master/PythonClient//car/DQNcar.py)
 
-This example works with AirSimNeighborhood environment available in [releases](https://github.com/Microsoft/AirSim/releases).
+이 예제는 [릴리스](https://github.com/Microsoft/AirSim/releases)에서 사용 가능한 AirSimNeighborhood 환경에서 작동합니다.
 
-First, we need to get the images from simulation and transform them appropriately. Below, we show how a depth image can be obtained from the ego camera and transformed to an 84X84 input to the network. (you can use other sensor modalities, and sensor inputs as well – of course you’ll have to modify the code accordingly).
+먼저 시뮬레이션에서 이미지를 가져와서 적절히 변환해야 합니다. 아래에서는 ego 카메라에서 깊이 이미지를 가져 와서 네트워크에 84X84 입력으로 변환하는 방법을 보여줍니다. (다른 센서 양식과 센서 입력도 사용할 수 있습니다. 물론 코드를 적절히 수정해야 합니다).
 
 ```
 responses = client.simGetImages([ImageRequest(0, AirSimImageType.DepthPerspective, True, False)])
 current_state = transform_input(responses)
 ```
 
-We further define the six actions (breaking, straight with throttle, full-left with throttle, full-right with throttle, half-left with throttle, half-right with throttle) that an agent can execute. This is done via the function `interpret_action`:
+또한 에이전트가 실행할 수 있는 6 가지 작업(분할, throttle을 사용한 직선, throttle을 사용한 왼쪽 전체, throttle을 사용한 오른쪽 전체, throttle이 있는 왼쪽 절반, throttle이 있는 오른쪽 절반)을 정의합니다. 이것은 `interpret_action` 함수를 통해 이루어집니다:
 
 ```
 def interpret_action(action):
@@ -42,7 +42,7 @@ def interpret_action(action):
     return car_controls
 ```
 
-We then define the reward function in `compute_reward` as a convex combination of how fast the vehicle is travelling and how much it deviates from the center line. The agent gets a high reward when its moving fast and staying in the center of the lane.
+그런 다음 `compute_reward`의 reward function은 차량이 얼마나 빨리 이동하는지와 중심선에서 얼마나 많이 벗어나는지의 convex 조합으로 정의됩니다. 에이전트는 빠르게 이동하고 차선 중앙에 머무를 때 높은 reward을 받습니다.
 
 ```
 def compute_reward(car_state):
@@ -71,7 +71,7 @@ def compute_reward(car_state):
     return reward
 ```
 
-The function `isDone` determines if the episode has terminated (e.g. due to collision). We look at the speed of the vehicle and if it is less than a threshold than the episode is considered to be terminated.
+함수 `isDone`은 에피소드가 종료되었는지 여부를 결정합니다(예: 충돌로 인해). 우리는 차량의 속도를 살펴보고 그것이 임계값보다 작으면 에피소드가 종료 된 것으로 간주됩니다.
 
 ```
 def isDone(car_state, car_controls, reward):
@@ -84,8 +84,8 @@ def isDone(car_state, car_controls, reward):
     return done
 ```
 
-The main loop then sequences through obtaining the image, computing the action to take according to the current policy, getting a reward and so forth.
-If the episode terminates then we reset the vehicle to the original state via: 
+그런 다음 메인 루프는 이미지 획득, 현재 정책에 따라 수행 할 작업 계산, reward 등을 통해 시퀀스됩니다.
+에피소드가 종료되면 다음을 통해 차량을 원래 상태로 재설정합니다:
 
 ```
 client.reset()
@@ -96,18 +96,18 @@ client.setCarControls(car_control)
 time.sleep(1)
 ```
 
-Note that the simulation needs to be up and running before you execute DQNcar.py. The video below shows first few episodes of DQN training.
+DQNcar.py를 실행하기 전에 시뮬레이션을 시작하고 실행해야 합니다. 아래 비디오는 DQN training의 몇가지 에피소드를 보여줍니다.
 
 [![Reinforcement Learning - Car](images/dqn_car.png)](https://youtu.be/fv-oFPAqSZ4)
 
-## RL with Quadrotor
+## 쿼드 로터의 RL
 
 [Source code](https://github.com/Microsoft/AirSim/tree/master/PythonClient//multirotor/DQNdrone.py)
 
-This example works with AirSimMountainLandscape environment available in [releases](https://github.com/Microsoft/AirSim/releases).
+이 예제는 [릴리스](https://github.com/Microsoft/AirSim/releases)에서 사용 가능한 AirSimMountainLandscape 환경에서 작동합니다.
 
-We can similarly apply RL for various autonomous flight scenarios with quadrotors. Below is an example on how RL could be used to train quadrotors to follow high tension power lines (e.g. application for energy infrastructure inspection).
-There are seven actions here that correspond to different directions in which the quadrotor can move in (six directions + one hovering action).
+쿼드 로터를 사용하여 다양한 자율 비행 시나리오에 RL을 유사하게 적용 할 수 있습니다. 아래는 RL을 사용하여 쿼드 로터가 고압 전력선을 따르도록 훈련하는 방법에 대한 예 입니다(예: 에너지 인프라 검사 애플리케이션).
+여기에는 쿼드 로터가 이동할 수 있는 다른 방향에 해당하는 7가지 동작이 있습니다 (6방향 + 하나의 호버링 동작).
 
 ```
 def interpret_action(action):
@@ -128,7 +128,7 @@ def interpret_action(action):
     return quad_offset
 ```
 
-The reward again is a function how how fast the quad travels in conjunction with how far it gets from the known powerlines.
+다시 reward 쿼드가 알려진 전력선으로부터 얼마나 멀리 떨어져 있는지와 함께 쿼드가 얼마나 빨리 이동하는지에 대한 함수입니다.
 
 ```
 def compute_reward(quad_state, quad_vel, collision_info):
@@ -154,9 +154,9 @@ def compute_reward(quad_state, quad_vel, collision_info):
     return reward
 ```
 
-We consider an episode to terminate if it drifts too much away from the known power line coordinates. 
+알려진 전력선 좌표에서 너무 많이 표류하면 에피소드가 종료되는 것으로 간주합니다.
 
-The reset function here flies the quadrotor to the initial starting point:
+여기서 재설정 기능은 쿼드 로터를 초기 시작점으로 해서 비행합니다:
 
 ```
     if done:
@@ -166,9 +166,9 @@ The reset function here flies the quadrotor to the initial starting point:
         current_step +=1
 ```
 
-Here is the video of first few episodes during the training.
+다음은 훈련 중 처음 몇 에피소드의 비디오입니다.
 
 [![Reinforcement Learning - Quadrotor](images/dqn_quadcopter.png)](https://youtu.be/uKm15Y3M1Nk)
 
-## Related
- Please also see [The Autonomous Driving Cookbook](https://aka.ms/AutonomousDrivingCookbook) by Microsoft Deep Learning and Robotics Garage Chapter.
+## 관련
+ Microsoft Deep Learning 및 Robotics Garage Chapter의 [The Autonomous Driving Cookbook](https://aka.ms/AutonomousDrivingCookbook)도 참조하십시오.
