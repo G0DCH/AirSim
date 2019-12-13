@@ -1,47 +1,45 @@
-# Building PX4
+# PX4 빌드
 
-## Source code
+## 소스 코드
 
-Getting the PX4 source code is easy:
+PX4 소스 코드를 얻는 것은 쉽습니다:
 ````
 git clone https://github.com/PX4/Firmware.git
 cd Firmware
 ````
 
-Oh, and if you don't have git yet just run this:
+아직 git이 없다면 이것을 실행하십시오:
 
 ````
 sudo apt-get install git
 ````
 
-We are currently testing using the 1.6.0rc1 version, but the latest master branch should be ok too.
-Now to build it you will need the right tools.
+현재 1.6.0rc1 버전을 사용하여 테스트하고 있지만 최신 마스터 브랜치도 괜찮습니다.
+이제 그것을 빌드하려면 올바른 도구가 필요합니다.
 
-## PX4 Build tools
+## PX4 빌드 도구
 
-The full instructions are available on the [dev.px4.io](http://dev.px4.io/starting-installing-linux.html) website,
-but we've copied the relevant subset of those instructions here for your convenience.
+전체 지침은 [dev.px4.io](http://dev.px4.io/starting-installing-linux.html) 웹 사이트에서 볼 수 있지만 편의를 위해 해당 지침의 관련 서브셋을 여기에 복사했습니다.
 
-(Note that [BashOnWindows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)) can be used to build
-the PX4 firmware, just follow the BashOnWindows instructions at the bottom of this page).
+([BashOnWindows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)를 사용하여 PX4 펌웨어를 빌드 할 수 있습니다. 이 페이지 하단의 BashOnWindows 지침을 따르십시오)
 
-## Build SITL version
+## SITL version 빌드
 
-Now you can make the SITL version that runs in posix, from the Firmware folder you created above:
+이제 위에서 만든 펌웨어 폴더에서 posix에서 실행되는 SITL 버전을 만들 수 있습니다:
 ````
 make posix_sitl_ekf2
 ````
 
-Note: this build system is quite special, it knows how to update git submodules (and there's a lot of them),
-then it runs cmake (if necessary), then it runs the build itself.  So in a way the root Makefile is a meta-meta makefile :-) 
+참고: 이 빌드 시스템은 매우 특별합니다 .git 서브 모듈(그리고 거기에 있는 많은 것들)을 업데이트하는 방법을 알고,
+cmake(필요한 경우)를 실행 한 다음 빌드 자체를 실행합니다. 루트 Makefile은 meta-meta makefile 파일입니다. :-) 
 
-It shouldn't take long, about 2 minutes.  If all succeeds, the last line will link the `px4` app, which you can then run using the following:
+약 2분도 채 걸리지 않습니다. 모두 성공하면 마지막 줄은 `px4` 앱을 연결하고, 다음을 사용하여 실행할 수 있습니다:
 
 ````
 make posix_sitl_ekf2  none_iris
 ````
 
-And you should see output that looks like this:
+그리고 다음과 같은 출력이 표시됩니다:
 
 ````
 creating new parameters file
@@ -70,17 +68,17 @@ INFO  [dataman] Unkown restart, data manager file 'rootfs/fs/microsd/dataman' si
 
 ````
 
-so this is good, first run sets up the px4 parameters for SITL mode.  Second run has less output.
-This app is also an interactive console where you can type commands.  Type 'help' to see what they are
-and just type ctrl-C to kill it.  You can do that and restart it any time, that's a great way to reset
-any wonky state if you need to (it's equivalent to a Pixhawk hardware reboot).
+이 방법은 좋습니다. 첫 번째 실행은 SITL 모드에 대한 px4 파라미터를 설정합니다. 두 번째 실행은 출력이 적습니다.
+이 앱은 또한 명령을 입력 할 수있는 대화식 콘솔입니다. 그들이 무엇인지 보려면 'help'를 입력하고,
+ctrl-C를 입력하여 도움말을 종료하십시오. 언제든지 다시 시작할 수 있습니다. 
+필요한 경우 wonky state를 재설정 하는 것이 좋은 방법입니다(Pixhawk 하드웨어 재부팅과 동일함).
 
-## ARM embedded tools
+## ARM 임베디드 툴
 
-If you plan to build the PX4 firmware for real Pixhawk hardware then you will need the gcc cross-compiler
-for ARM Cortex-M4 chipset.  You can get this compiler by PX4 DevGuide, specifically this is in their `ubuntu_sim_nuttx.sh` setup script.
+실제 Pixhawk 하드웨어 용 PX4 펌웨어를 구축하려면 ARM Cortex-M4 칩셋 용 gcc 크로스 컴파일러가 필요합니다.
+이 컴파일러는 PX4 DevGuide로 구할 수 있으며, 특히 `ubuntu_sim_nuttx.sh` 설정 스크립트에 있습니다.
 
-After following those setup instructions you can verify the install by entering this command `arm-none-eabi-gcc --version`.  You should see the following output:
+이러한 설정 지침을 수행 한 후 `arm-none-eabi-gcc --version` 명령을 입력하여 설치를 확인할 수 있습니다. 다음과 같은 결과가 나타납니다:
 ````
 arm-none-eabi-gcc (GNU Tools for Arm Embedded Processors 7-2017-q4-major) 7.2.1 20170904 (release) [ARM/embedded-7-branch revision 255204]
 Copyright (C) 2017 Free Software Foundation, Inc.
@@ -88,44 +86,40 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ````
 
-## Build PX4 for ARM hardware
+## ARM 하드웨어에서 PX4 빌드
 
-Now  you  can build the PX4 firmware for running on real pixhawk hardware:
+이제 실제 pixhawk 하드웨어에서 실행하기 위해 PX4 펌웨어를 빌드 할 수 있습니다:
 
 ````
 make px4fmu-v2_default
 ````
 
-This build will take a little longer because it is building a lot more including the NuttX real time OS,
-all the drivers for the sensors in the Pixhawk flight controller, and more.  It is also running the compiler
-in super size-squeezing mode so it can fit all that in a 1 megabyte ROM !!
+이 빌드는 NuttX 실시간 OS, Pixhawk 비행 컨트롤러의 센서에 대한 모든 드라이버 등을 포함하여 훨씬 더 많이 빌드하므로 시간이 조금 더 걸립니다. 또한 컴파일러를 대용량 압축 모드로 실행하여 1MB ROM에 모든 것을 맞출 수 있습니다!!
 
-One nice tid bit is you can plug in your pixhawk USB, and type `make px4fmu-v2_default upload` to flash the
-hardware with these brand new bits, so you don't need to use QGroundControl for that.
+좋은 tid 비트 하나는 pixhawk USB를 연결하고`make px4fmu-v2_default upload`를 입력하여 새로운 비트로 하드웨어를 플래시 할 수 있으므로 QGroundControl을 사용할 필요가 없다는 것입니다.
 
-## Some Useful Parameters
+## 유용한 매개 변수
 
-PX4 has many customizable parameters (over 700 of them, in fact) and to get best results with AirSim we have
-found the following parameters are handy:
+PX4에는 많은 사용자 정의 가능한 매개 변수가 있으며 (실제로 700 개 이상) AirSim으로 최상의 결과를 얻으려면 다음 매개 변수가 유용하다는 것을 알았습니다:
 ````
-// be sure to enable the new position estimator module:
+// 새 위치 추정기 모듈을 활성화 해야 합니다:
 param set SYS_MC_EST_GROUP 2
 
-// increase default limits on cruise speed so you can move around a large map more quickly.
+// 크루즈 속도의 기본 제한을 높이면 큰 맵을 더 빠르게 이동할 수 있습니다.
 param MPC_XY_CRUISE 10             
 param MPC_XY_VEL_MAX 10
 param MPC_Z_VEL_MAX_DN 2
 
-// increase timeout for auto-disarm on landing so that any long running app doesn't have to worry about it
+// 착륙시 자동 해제에 대한 시간 초과를 늘려 장기 실행 앱이 걱정할 필요가 없습니다.
 param COM_DISARM_LAND 60
 
-// make it possible to fly without radio control attached (do NOT do this one on a real drone)
+// 무선 조종 장치를 부착하지 않고 비행 할 수 있도록 합니다(실제 드론에서는이 작업을 수행하지 마십시오).
 param NAV_RCL_ACT 0
 
-// enable new syslogger to get more information from PX4 logs
+// 새로운 syslogger가 PX4 로그에서 더 많은 정보를 얻도록 설정
 param set SYS_LOGGER 1
 ````
 
-## Using BashOnWindows
+## BashOnWindows 사용
 
-See [Bash on Windows Toolchain](https://dev.px4.io/en/setup/dev_env_windows_bash_on_win.html).
+[Bash on Windows Toolchain](https://dev.px4.io/en/setup/dev_env_windows_bash_on_win.html)를 보십시오.
