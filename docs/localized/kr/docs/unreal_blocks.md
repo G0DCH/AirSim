@@ -1,37 +1,37 @@
 
-# Setup Blocks Environment for AirSim
+# AirSim에서 Blocks 환경 설정
 
-Blocks environment is available in repo in folder `Unreal/Environments/Blocks` and is designed to be lightweight in size. That means its very basic but fast.
+Blocks 환경은 리포지토리에서 `Unreal/Environments/Blocks` 폴더로 제공되며 크기가 가볍게 디자인되었습니다. 그것은 매우 기본적이지만 빠르다는 것을 의미합니다.
 
-Here are quick steps to get Blocks environment up and running:
+다음은 Blocks 환경을 시작하고 실행하는 빠른 단계입니다.
 
 ## Windows
 
-1. Make sure you have [installed Unreal and built AirSim](build_windows.md).
-2. Navigate to folder `AirSim\Unreal\Environments\Blocks` and run `update_from_git.bat`.
-3. Double click on generated .sln file to open in Visual Studio 2017 or newer.
-4. Make sure `Blocks` project is the startup project, build configuration is set to `DebugGame_Editor` and `Win64`. Hit F5 to run.
-5. Press the Play button in Unreal Editor and you will see something like in below video. Also see [how to use AirSim](https://github.com/Microsoft/AirSim/#how-to-use-it).
+1. [Unreal을 설치하고 AirSim을 설치했는지](build_windows.md) 확인하십시오.
+2. `AirSim\Unreal\Environments\Blocks` 폴더로 이동하여 `update_from_git.bat`를 실행하십시오.
+3. 생성 된 .sln 파일을 더블 클릭하여 Visual Studio 2017버전 이상에서 엽니다.
+4. `Blocks` 프로젝트가 시작 프로젝트인지, 빌드 구성은 `DebugGame_Editor` 및 `Win64`로 설정되어 있는지 확인하십시오. F5를 눌러 실행하세요.
+5. Unreal 에디터에서 Play 버튼을 누르면 아래와 같은 비디오가 나타납니다. [AirSim 사용법](https://github.com/Microsoft/AirSim/#how-to-use-it)을 참조하십시오.
 
-### Changing Code and Rebuilding
-For Windows, you can just change the code in Visual Studio, press F5 and re-run. There are few batch files available in folder `AirSim\Unreal\Environments\Blocks` that lets you sync code, clean etc.
+### 코드 변경 및 다시 빌드 하기
+Windows의 경우 Visual Studio에서 코드를 변경하고 F5를 누른 후 다시 실행할 수 있습니다. `AirSim\Unreal\Environments\Blocks` 폴더에는 사용 가능한 배치 파일이 거의 없으므로 코드를 동기화하고 정리할 수 있습니다.
 
 ## Linux
-1. Make sure you have [built the Unreal Engine and AirSim](build_linux.md).
-2. Navigate to your UnrealEngine repo folder and run `Engine/Binaries/Linux/UE4Editor` which will start Unreal Editor.
-3. On first start you might not see any projects in UE4 editor. Click on Projects tab, Browse button and then navigate to `AirSim/Unreal/Environments/Blocks/Blocks.uproject`. 
-4. If you get prompted for incompatible version and conversion, select In-place conversion which is usually under "More" options. If you get prompted for missing modules, make sure to select No so you don't exit. 
-5. Finally, when prompted with building AirSim, select Yes. Now it might take a while so go get some coffee :).
-6. Press the Play button in Unreal Editor and you will see something like in below video. Also see [how to use AirSim](/#how-to-use-it).
+1. [Unreal 엔진과 AirSim을 빌드했는지](build_linux.md) 확인하십시오.
+2. UnrealEngine 저장 폴더로 이동하여 `Engine/Binaries/Linux/UE4Editor`를 실행하면 Unreal Editor가 시작됩니다.
+3. 처음 시작할 때 UE4 에디터에 프로젝트가 표시되지 않을 수 있습니다. 프로젝트 탭을 클릭하고 찾아보기 버튼을 클릭 한 다음 `AirSim/Unreal/Environments/Blocks/Blocks.uproject`로 이동하십시오.
+4. 호환되지 않는 버전 및 변환에 대한 프롬프트가 표시되면 일반적으로 "추가" 옵션 아래에 있는 전체 변환을 선택하십시오. 누락 된 모듈에 대한 프롬프트가 표시되면 아니오를 선택하여 종료하지 않도록 하십시오.
+5. 마지막으로 AirSim을 작성하라는 메시지가 표시되면 예를 선택하십시오. 이제 시간이 좀 걸릴 수 있으니 커피 마시러 가세요 :).
+6. Unreal 에디터에서 Play 버튼을 누르면 아래와 같은 비디오가 나타납니다. [AirSim 사용법](https://github.com/Microsoft/AirSim/#how-to-use-it)을 참조하십시오.
 
 [![Blocks Demo Video](images/blocks_video.png)](https://www.youtube.com/watch?v=-r_QGaxMT4A)
 
-### Changing Code and Rebuilding
-For Linux, make code changes in AirLib or Unreal/Plugins folder and then run `./build.sh` to rebuild. This step also copies the build output to Blocks sample project. You can then follow above steps again to re-run.
+### 코드 변경 및 다시 빌드 하기
+Linux의 경우 AirLib 또는 Unreal/Plugins 폴더에서 코드를 변경한 다음 `./build.sh`를 실행하여 다시 빌드하십시오. 이 단계는 또한 빌드 출력을 Blocks 샘플 프로젝트에 복사합니다. 그런 다음 위 단계를 다시 수행하여 다시 실행할 수 있습니다.
 
-## Chosing Your Vehicle: Car or Multirotor
-By default AirSim spawns multirotor. You can easily change this to car and use all of AirSim goodies. Please see [using car](using_car.md) guide.
+## 차량 선택 : 자동차 또는 멀티 로터
+기본적으로 AirSim은 멀티 로터를 생성합니다. 이것을 자동차로 쉽게 변경하고, 모든 AirSim 제품 사용할 수 있습니다. [자동차 사용](using_car.md) 가이드를 참조하십시오.
 
 ## FAQ
-#### I see warnings about like "_BuitData" file is missing. 
-These are intermediate files and you can safely ignore it.
+#### "_BuitData" 파일이 누락되었습다 와 같은 경고가 나타납니다.
+이것들은 중간 파일이므로 무시해도 됩니다.
