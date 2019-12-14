@@ -1,18 +1,18 @@
-# Unreal Environment
+# Unreal 환경
 
-## Setting Up the Unreal Project
+## Unreal 프로젝트 설정
 
-### Option 1: Built-in Blocks Environment
-To get up and running fast, you can use the Blocks project that already comes with AirSim. This is not very highly detailed environment to keep the repo size reasonable but we use it for various testing all the times and it is the easiest way to get your feet wet in this strange land. 
+### 옵션 1: 내장 Blocks 환경
+빠르게 실행하려면 AirSim과 함께 제공되는 Blocks 프로젝트를 사용할 수 있습니다. 이것은 리포지토리 크기를 합리적으로 유지하기 위해 매우 상세한 환경은 아니지만 다양한 테스트를 위해 항상 사용하며 이 환경을 체험하는데 가장 쉬운 방법입니다.
 
-Follow these [quick steps](unreal_blocks.md).
+이 [빠른 단계](unreal_blocks.md)를 따르십시오.
 
-### Option 2: Create Your Own Unreal Environment
-If you want to setup photo-realistic high quality environments, then you will need to create your own Unreal project. This is little bit more involved but worthwhile! 
+### 옵션 2: 자신만의 Unreal 환경 만들기
+사실적인 고품질 환경을 설정하려면 고유한 Unreal 프로젝트를 만들어야 합니다. 이것은 조금 더 복잡하지만 가치가 있습니다!
 
-Follow this [step-by-step guide](unreal_custenv.md). 
+이 [단계별 지침](unreal_custenv.md)을 따르십시오. 
 
-## Changing Code and Development Workflow
-To see how you can change and test AirSim code, please read our [recommended development workflow](dev_workflow.md).
+## 코드 및 개발 워크 플로우 변경
+AirSim 코드를 변경하고 테스트하는 방법을 보려면 [권장 개발 워크 플로우](dev_workflow.md)를 참조하십시오.
 
 
