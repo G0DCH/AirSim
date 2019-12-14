@@ -1,23 +1,23 @@
-# How to Create Issue or Ask Question Effectively
+# 이슈를 효과적으로 생성하거나 질문하는 방법
 
-AirSim is open source project and contributors like you keeps it going. It is important to respect contributors time and effort when you are asking a question or filing an issue. Your chances of receiving helpful response would increase if you follow below guidelines:
+AirSim은 오픈 소스 프로젝트이며 귀하와 같은 기여자들이 계속 진행하고 있습니다. 질문을 하거나 이슈를 제기 할 때 기여자에게 시간과 노력을 존중하는 것이 중요합니다. 아래 지침을 따르면 도움이 되는 응답을 받을 가능성이 높아집니다:
 
-## DOs
+## 할 것
 
-* [Search issues](https://github.com/Microsoft/AirSim/issues?utf8=%E2%9C%93&q=is%3Aissue) to see if someone already has asked it.
-* Chose title that is short and summarizes well. 
-* Copy and paste full error message.
-* Precisely describe steps you used that produced the error message or symptom.
-* Describe what vehicle, mode, OS, AirSim version and other settings you are using.
-* Copy and paste minimal version of code that reproduces the problem.
-* Tell us what the goal you want to achieve or expected output.
-* Tell us what you did so far to debug this issue.
+* 누군가가 이미 제기했는지 확인하기 위해 [이슈를 검색](https://github.com/Microsoft/AirSim/issues?utf8=%E2%9C%93&q=is%3Aissue)하십시오.
+* 짧고 잘 요약된 제목을 선택하십시오.
+* 전체 오류 메시지를 복사하여 붙여 넣습니다.
+* 오류 메시지나 증상을 생성한 단계를 정확하게 설명하십시오.
+* 사용중인 차량, 모드, OS, AirSim 버전 및 기타 설정을 설명하십시오.
+* 문제를 재현하는 최소 버전의 코드를 복사하여 붙여 넣습니다.
+* 달성하고자 하는 목표 또는 예상되는 결과를 알려주십시오.
+* 이 문제를 디버깅하기 위해 지금까지 무엇을 했는지 알려주십시오.
 
-## DONT'S
+## 하지 말 것
 
-* Do not use "Please help" etc in the title. See above.
-* Do not copy and paste screen shot of error message. Copy and paste text.
-* Do not use "it doesn't work". Precisely state what is the error message or symptom.
-* Do not ask to write code for you. [Contribute](../CONTRIBUTING.md)!
+* 제목에 "Please help"등을 사용하지 마십시오. 위를 참조하십시오.
+* 오류 메시지의 스크린 샷을 붙여 넣지 마십시오. 텍스트를 복사하여 붙여 넣습니다.
+* "작동하지 않습니다"를 사용하지 마십시오. 오류 메시지 또는 증상을 정확하게 설명하십시오.
+* 당신을 위해 코드를 작성하도록 요청하지 마십시오. [기여](../CONTRIBUTING.md)하십시오!
 
 
