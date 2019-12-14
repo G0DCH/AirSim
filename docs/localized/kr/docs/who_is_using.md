@@ -1,7 +1,7 @@
-# Who is Using AirSim?
+# AirSim을 사용하는 사람은 누구입니까?
 
-#### Would you like to see your own group or project here? 
-Just add a [GitHub issue](https://github.com/microsoft/airsim/issues) with quick details and link to your website or paper or send us email at msrair at microsoft.com.
+#### 여기에 자신의 그룹이나 프로젝트를 노출시키고 싶습니까?
+간단한 세부 정보가 포함된 [GitHub 이슈](https://github.com/microsoft/airsim/issues)를 추가하고, 당신의 웹 사이트 링크를 걸거나 microsoft.com의 msrair로 전자 메일을 보내십시오.
 
 * [NASA Ames Research Center – Systems Analysis Office](https://www.nasa.gov/ames)
 * [Astrobotic](https://www.astrobotic.com/technology)
